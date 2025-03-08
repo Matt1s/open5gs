@@ -11,7 +11,7 @@ global:
 bsf:
   sbi:
     server:
-      - address: 127.0.0.15
+      - address: 192.168.56.115
         port: 7777
     client:
 #      nrf:
