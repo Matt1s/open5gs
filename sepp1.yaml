@@ -18,31 +18,31 @@ sepp:
         cacert: /etc/open5gs/tls/ca.crt
   sbi:
     server:
-      - address: 127.0.1.250
+      - address: 192.168.57.250
         port: 7777
     client:
 #      nrf:
 #        - uri: http://127.0.0.10:7777
       scp:
-        - uri: http://127.0.0.200:7777
+        - uri: http://192.168.56.200:7777
   n32:
     server:
       - sender: sepp1.localdomain
         scheme: https
-        address: 127.0.1.251
+        address: 192.168.57.251
         port: 7777
         n32f:
           scheme: https
-          address: 127.0.1.252
+          address: 192.168.57.252
           port: 7777
     client:
       sepp:
         - receiver: sepp2.localdomain
           uri: https://sepp2.localdomain:7777
-          resolve: 127.0.2.251
+          resolve: 192.168.58.251
           n32f:
             uri: https://sepp2.localdomain:7777
-            resolve: 127.0.2.252
+            resolve: 192.168.58.252
 
 ################################################################################
 # SEPP Info

@@ -28,14 +28,14 @@ mme:
   gummei:
     - plmn_id:
         mcc: 272
-        mnc: 76
+        mnc: 74
       mme_gid: 2
       mme_code: 1
   tai:
     - plmn_id:
         mcc: 272
-        mnc: 76
-      tac: 7
+        mnc: 74
+      tac: [1,7]
   security:
     integrity_order : [ EIA2, EIA1, EIA0 ]
     ciphering_order : [ EEA0, EEA1, EEA2 ]
