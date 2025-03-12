@@ -15,15 +15,15 @@ mme:
       - address: 192.168.56.102
   gtpc:
     server:
-      - address: 192.168.56.102
+      - address: 127.0.0.102
     client:
       sgwc:
-        - address: 192.168.56.103
+        - address: 127.0.0.103
       smf:
         - address: 192.168.56.104
   metrics:
     server:
-      - address: 192.168.56.102
+      - address: 127.0.0.102
         port: 9090
   gummei:
     - plmn_id:
@@ -35,7 +35,7 @@ mme:
     - plmn_id:
         mcc: 272
         mnc: 74
-      tac: [1,7]
+      tac: 7
   security:
     integrity_order : [ EIA2, EIA1, EIA0 ]
     ciphering_order : [ EEA0, EEA1, EEA2 ]

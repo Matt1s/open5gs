@@ -17,7 +17,7 @@ smf:
 #      nrf:
 #        - uri: http://127.0.0.10:7777
       scp:
-        - uri: http://192.168.56.200:7777
+        - uri: http://127.0.0.200:7777
   pfcp:
     server:
       - address: 192.168.56.104
