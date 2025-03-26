@@ -11,13 +11,13 @@ global:
 sgwc:
   gtpc:
     server:
-      - address: 127.0.0.3
+      - address: 127.0.0.103
   pfcp:
     server:
-      - address: 127.0.0.3
+      - address: 127.0.0.103
     client:
       sgwu:
-        - address: 127.0.0.6
+        - address: 127.0.0.106
 
 ################################################################################
 # GTP-C Server

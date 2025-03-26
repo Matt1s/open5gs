@@ -1,6 +1,7 @@
 logger:
   file:
     path: /var/log/open5gs/amf.log
+    level: debug
 #  level: info   # fatal|error|warn|info(default)|debug|trace
 
 global:
@@ -11,7 +12,7 @@ global:
 amf:
   sbi:
     server:
-      - address: 127.0.0.5
+      - address: 127.0.0.105
         port: 7777
     client:
 #      nrf:
@@ -20,24 +21,39 @@ amf:
         - uri: http://127.0.0.200:7777
   ngap:
     server:
-      - address: 127.0.0.5
+      - address: 192.168.56.105
   metrics:
     server:
-      - address: 127.0.0.5
+      - address: 127.0.0.105
         port: 9090
   guami:
+    - plmn_id:
+        mcc: 272
+        mnc: 74
+      amf_id:
+        region: 1
+        set: 1
     - plmn_id:
         mcc: 999
         mnc: 70
       amf_id:
         region: 2
-        set: 1
+        set: 2
   tai:
+    - plmn_id:
+        mcc: 272
+        mnc: 74
+      tac: [1,7]
     - plmn_id:
         mcc: 999
         mnc: 70
       tac: 1
   plmn_support:
+    - plmn_id:
+        mcc: 272
+        mnc: 74
+      s_nssai:
+        - sst: 1
     - plmn_id:
         mcc: 999
         mnc: 70
