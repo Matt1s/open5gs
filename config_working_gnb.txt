@@ -1,0 +1,113 @@
+gnb@gnb-desktop:~/srsRAN_Project/build/apps/gnb$
+gnb@gnb-desktop:~/srsRAN_Project/build/apps/gnb$ ip a
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+2: wlP1p1s0: <BROADCAST,MULTICAST> mtu 1500 qdisc noqueue state DOWN group default qlen 1000
+    link/ether cc:47:40:55:61:8d brd ff:ff:ff:ff:ff:ff
+    inet 10.10.119.254/17 brd 10.10.127.255 scope global dynamic noprefixroute wlP1p1s0
+       valid_lft 2162sec preferred_lft 2162sec
+    inet6 fe80::f96d:c329:28e7:fbf8/64 scope link tentative noprefixroute 
+       valid_lft forever preferred_lft forever
+3: ogstun: <NO-CARRIER,POINTOPOINT,MULTICAST,NOARP,UP> mtu 1400 qdisc pfifo_fast state DOWN group default qlen 500
+    link/none 
+    inet6 fe80::a803:5e88:f99c:4c03/64 scope link stable-privacy 
+       valid_lft forever preferred_lft forever
+4: enP8p1s0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 48:b0:2d:eb:ef:16 brd ff:ff:ff:ff:ff:ff
+    inet 192.168.56.150/24 brd 192.168.56.255 scope global noprefixroute enP8p1s0
+       valid_lft forever preferred_lft forever
+    inet6 fe80::fec5:f2de:3bcf:9677/64 scope link noprefixroute 
+       valid_lft forever preferred_lft forever
+5: l4tbr0: <BROADCAST,MULTICAST> mtu 1500 qdisc noop state DOWN group default qlen 1000
+    link/ether 3e:c7:e7:79:f3:87 brd ff:ff:ff:ff:ff:ff
+6: usb0: <NO-CARRIER,BROADCAST,MULTICAST,UP> mtu 1500 qdisc pfifo_fast master l4tbr0 state DOWN group default qlen 1000
+    link/ether 02:61:54:a1:9c:c1 brd ff:ff:ff:ff:ff:ff
+7: usb1: <NO-CARRIER,BROADCAST,MULTICAST,UP> mtu 1500 qdisc pfifo_fast master l4tbr0 state DOWN group default qlen 1000
+    link/ether 02:61:54:a1:9c:c3 brd ff:ff:ff:ff:ff:ff
+8: docker0: <NO-CARRIER,BROADCAST,MULTICAST,UP> mtu 1500 qdisc noqueue state DOWN group default 
+    link/ether 0e:78:c4:50:ed:90 brd ff:ff:ff:ff:ff:ff
+    inet 172.17.0.1/16 brd 172.17.255.255 scope global docker0
+       valid_lft forever preferred_lft forever
+
+gnb@gnb-desktop:~/srsRAN_Project/build/apps/gnb$ ip route
+172.17.0.0/16 dev docker0 proto kernel scope link src 172.17.0.1 linkdown 
+192.168.56.0/24 dev enP8p1s0 scope link 
+192.168.56.0/24 dev enP8p1s0 proto kernel scope link src 192.168.56.150 metric 100
+
+
+
+
+gnb@gnb-desktop:~$ sudo iptables -L -v -n
+[sudo] password for gnb: 
+Sorry, try again.
+[sudo] password for gnb: 
+Chain INPUT (policy ACCEPT 671K packets, 641M bytes)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain FORWARD (policy DROP 0 packets, 0 bytes)
+ pkts bytes target     prot opt in     out     source               destination         
+    0     0 DOCKER-USER  all  --  *      *       0.0.0.0/0            0.0.0.0/0           
+    0     0 DOCKER-FORWARD  all  --  *      *       0.0.0.0/0            0.0.0.0/0           
+
+Chain OUTPUT (policy ACCEPT 576K packets, 257M bytes)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain DOCKER (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+    0     0 DROP       all  --  !docker0 docker0  0.0.0.0/0            0.0.0.0/0           
+
+Chain DOCKER-BRIDGE (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+    0     0 DOCKER     all  --  *      docker0  0.0.0.0/0            0.0.0.0/0           
+
+Chain DOCKER-CT (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+    0     0 ACCEPT     all  --  *      docker0  0.0.0.0/0            0.0.0.0/0            ctstate RELATED,ESTABLISHED
+
+Chain DOCKER-FORWARD (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+    0     0 DOCKER-CT  all  --  *      *       0.0.0.0/0            0.0.0.0/0           
+    0     0 DOCKER-ISOLATION-STAGE-1  all  --  *      *       0.0.0.0/0            0.0.0.0/0           
+    0     0 DOCKER-BRIDGE  all  --  *      *       0.0.0.0/0            0.0.0.0/0           
+    0     0 ACCEPT     all  --  docker0 *       0.0.0.0/0            0.0.0.0/0           
+
+Chain DOCKER-ISOLATION-STAGE-1 (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+    0     0 DOCKER-ISOLATION-STAGE-2  all  --  docker0 !docker0  0.0.0.0/0            0.0.0.0/0           
+
+Chain DOCKER-ISOLATION-STAGE-2 (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+    0     0 DROP       all  --  *      docker0  0.0.0.0/0            0.0.0.0/0           
+
+Chain DOCKER-USER (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+    0     0 RETURN     all  --  *      *       0.0.0.0/0            0.0.0.0/0           
+gnb@gnb-desktop:~$ 
+
+
+
+gnb@gnb-desktop:~$ sudo iptables -t nat -L -v -n
+Chain PREROUTING (policy ACCEPT 1861 packets, 163K bytes)
+ pkts bytes target     prot opt in     out     source               destination         
+    2   432 DOCKER     all  --  *      *       0.0.0.0/0            0.0.0.0/0            ADDRTYPE match dst-type LOCAL
+
+Chain INPUT (policy ACCEPT 1828 packets, 160K bytes)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain OUTPUT (policy ACCEPT 568 packets, 40252 bytes)
+ pkts bytes target     prot opt in     out     source               destination         
+    3  1484 DOCKER     all  --  *      *       0.0.0.0/0           !127.0.0.0/8          ADDRTYPE match dst-type LOCAL
+
+Chain POSTROUTING (policy ACCEPT 568 packets, 40252 bytes)
+ pkts bytes target     prot opt in     out     source               destination         
+    0     0 MASQUERADE  all  --  *      !docker0  172.17.0.0/16        0.0.0.0/0           
+    0     0 MASQUERADE  all  --  *      !ogstun  10.45.0.0/16         0.0.0.0/0           
+
+Chain DOCKER (2 references)
+ pkts bytes target     prot opt in     out     source               destination         
+    0     0 RETURN     all  --  docker0 *       0.0.0.0/0            0.0.0.0/0           
+gnb@gnb-desktop:~$ 
