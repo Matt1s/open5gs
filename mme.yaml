@@ -12,7 +12,7 @@ mme:
   freeDiameter: /etc/freeDiameter/mme.conf
   s1ap:
     server:
-      - address: 192.168.56.102
+      - address: 127.0.0.102
   gtpc:
     server:
       - address: 127.0.0.102
@@ -20,7 +20,7 @@ mme:
       sgwc:
         - address: 127.0.0.103
       smf:
-        - address: 192.168.56.104
+        - address: 127.0.0.104
   metrics:
     server:
       - address: 127.0.0.102

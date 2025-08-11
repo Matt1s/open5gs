@@ -11,13 +11,13 @@ global:
 upf:
   pfcp:
     server:
-      - address: 192.168.56.107
+      - address: 127.0.0.107
     client:
 #      smf:     #  UPF PFCP Client try to associate SMF PFCP Server
 #        - address: 127.0.0.4
   gtpu:
     server:
-      - address: 192.168.56.107
+      - address: 127.0.0.107
   session:
     - subnet: 10.45.0.0/16
       gateway: 10.45.0.1
@@ -25,7 +25,7 @@ upf:
       gateway: 2001:db8:cafe::1
   metrics:
     server:
-      - address: 192.168.56.107
+      - address: 127.0.0.107
         port: 9090
 
 ################################################################################
