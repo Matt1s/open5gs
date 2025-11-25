@@ -438,7 +438,7 @@ amf:
     guami:
       - plmn_id:
           mcc: 262 
-          mnc: 74
+          mnc: 01
         amf_id:
           region: 1
           set: 1
@@ -451,7 +451,7 @@ amf:
     tai:
       - plmn_id:
           mcc: 262 
-          mnc: 74
+          mnc: 01
         tac: [1,7]
       - plmn_id:
           mcc: 999
@@ -460,7 +460,7 @@ amf:
     plmn_support:
       - plmn_id:
           mcc: 262
-          mnc: 74
+          mnc: 01
         s_nssai:
           - sst: 1
       - plmn_id:
