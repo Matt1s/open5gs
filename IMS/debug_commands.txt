@@ -1,0 +1,52 @@
+IMS LOGS:
+docker logs smf 2>&1 | grep -E "DNN\[ims\]|IMSI.*ims" | tail -20
+
+debug IMS:
+docker logs pcscf 2>&1 | grep -iE "REGISTER|register" | tail -20
+
+IMS Registration Check:
+# Check if devices are registered in S-CSCF
+docker logs scscf 2>&1 | grep "State: \[registered\]" | tail -10
+
+# Check current IMS PDU sessions
+docker logs smf 2>&1 | grep "Number of SMF-Sessions" | tail -3
+
+# If NO IMS registration after container restart:
+# 1. On phone: Toggle VoLTE on/off in settings, OR
+# 2. On phone: Airplane mode on (10 sec) then off, OR
+# 3. Reboot both phones
+
+VoLTE Call Debug:
+# Check PCF QoS notification failures
+docker logs pcf 2>&1 | grep -E "SmContextStatusNotification|ERROR" | tail -20
+
+# Check P-CSCF N5 interface
+docker logs pcscf 2>&1 | grep -E "N5_INIT|N5_PATCH|HTTP.*200|qosVoNR" | tail -20
+
+# Check which deployment mode is active
+docker exec pcscf cat /etc/kamailio_pcscf/pcscf.cfg | grep "^#!define WITH_"
+
+# Check if SMF is running and last crash
+docker ps | grep smf
+docker logs smf 2>&1 | grep -E "FATAL|Assertion|Aborted" | tail -5
+
+SMS Debug:
+# Check SMSC message delivery
+docker logs smsc 2>&1 | grep -E "FROM|TO|TEXT|Dropping|substr out of range" | tail -30
+
+# Restart SMF after crash (KNOWN BUG: SMF crashes on QoS modification)
+docker-compose -f sa-vonr-deploy.yaml restart smf
+
+# After SMF restart, phones need to reconnect (airplane mode toggle)
+
+CALL FIX APPLIED:
+# Disabled N5 dynamic QoS to prevent SMF crash
+# Modified files:
+#  - pcscf/route/mo.cfg (line 80-82)
+#  - pcscf/route/mt.cfg (line 15-17)
+# Calls now use default IMS bearer instead of dedicated QoS flows
+
+# To test calls after fix:
+# 1. Toggle airplane mode on both phones
+# 2. Wait for IMS registration
+# 3. Try calling - should ring now without SMF crash

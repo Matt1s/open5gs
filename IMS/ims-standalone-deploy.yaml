@@ -1,0 +1,210 @@
+services:
+  dns:
+    build: ./dns
+    image: docker_dns
+    container_name: ims_dns
+    network_mode: host
+    env_file:
+      - .env
+    volumes:
+      - ./dns:/mnt/dns
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+
+  rtpengine:
+    build: ./rtpengine
+    image: docker_rtpengine
+    container_name: ims_rtpengine
+    network_mode: host
+    privileged: true
+    env_file:
+      - .env
+    volumes:
+      - ./rtpengine:/mnt/rtpengine
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    cap_add:
+      - NET_ADMIN
+    environment:
+      - TABLE=0
+      - INTERFACE=${RTPENGINE_IP}
+      - LISTEN_NG=${RTPENGINE_IP}:2223
+      - PIDFILE=/run/ngcp-rtpengine-daemon.pid
+      - PORT_MAX=50000
+      - PORT_MIN=49000
+      - NO_FALLBACK=no
+      - TOS=184
+
+  mysql:
+    build: ./mysql
+    image: docker_mysql
+    container_name: ims_mysql
+    env_file:
+      - .env
+    volumes:
+      - ims_dbdata:/var/lib/mysql
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    expose:
+      - "3306/tcp"
+    networks:
+      ims_network:
+        ipv4_address: ${MYSQL_IP}
+
+  pyhss:
+    build: ./pyhss
+    image: docker_pyhss
+    container_name: ims_pyhss
+    dns:
+      - 192.168.50.15
+      - 8.8.8.8
+    volumes:
+      - ./pyhss:/mnt/pyhss
+      - ./pyhss/logs:/pyhss/log/
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    env_file:
+      - .env
+    depends_on:
+      - dns
+      - mysql
+    expose:
+      - "${PYHSS_BIND_PORT}/tcp"
+      - "${PYHSS_BIND_PORT}/sctp"
+      - "8080/tcp"
+    ports:
+      - "8080:8080/tcp"
+      - "${PYHSS_BIND_PORT}:${PYHSS_BIND_PORT}/tcp"
+      - "${PYHSS_BIND_PORT}:${PYHSS_BIND_PORT}/sctp"
+    networks:
+      ims_network:
+        ipv4_address: ${PYHSS_IP}
+
+  icscf:
+    image: docker_kamailio
+    container_name: ims_icscf
+    dns:
+      - 192.168.50.15
+      - 8.8.8.8
+    volumes:
+      - ./icscf:/mnt/icscf
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    env_file:
+      - .env
+    environment:
+      - COMPONENT_NAME=icscf
+    depends_on:
+      - dns
+      - mysql
+      - pyhss
+    expose:
+      - "${ICSCF_BIND_PORT}/tcp"
+      - "${ICSCF_BIND_PORT}/sctp"
+      - "4060/udp"
+      - "4060/tcp"
+    ports:
+      - "${ICSCF_BIND_PORT}:${ICSCF_BIND_PORT}/tcp"
+      - "${ICSCF_BIND_PORT}:${ICSCF_BIND_PORT}/sctp"
+      - "4060:4060/udp"
+      - "4060:4060/tcp"
+    networks:
+      ims_network:
+        ipv4_address: ${ICSCF_IP}
+
+  scscf:
+    image: docker_kamailio
+    container_name: ims_scscf
+    dns:
+      - 192.168.50.15
+      - 8.8.8.8
+    volumes:
+      - ./scscf:/mnt/scscf
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    env_file:
+      - .env
+    environment:
+      - COMPONENT_NAME=scscf
+    depends_on:
+      - dns
+      - mysql
+      - pyhss
+    expose:
+      - "${SCSCF_BIND_PORT}/tcp"
+      - "${SCSCF_BIND_PORT}/sctp"
+      - "6060/udp"
+      - "6060/tcp"
+    ports:
+      - "${SCSCF_BIND_PORT}:${SCSCF_BIND_PORT}/tcp"
+      - "${SCSCF_BIND_PORT}:${SCSCF_BIND_PORT}/sctp"
+      - "6060:6060/udp"
+      - "6060:6060/tcp"
+    networks:
+      ims_network:
+        ipv4_address: ${SCSCF_IP}
+
+  pcscf:
+    image: docker_kamailio
+    container_name: ims_pcscf
+    network_mode: host
+    dns: ${DNS_IP}
+    privileged: true
+    cap_add:
+      - NET_ADMIN
+    volumes:
+      - ./pcscf:/mnt/pcscf
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    env_file:
+      - .env
+    environment:
+      - COMPONENT_NAME=pcscf
+      - DEPLOY_MODE=5G
+    depends_on:
+      - dns
+      - mysql
+      - rtpengine
+      - icscf
+      - scscf
+
+  smsc:
+    image: docker_kamailio
+    container_name: ims_smsc
+    dns:
+      - 192.168.50.15
+      - 8.8.8.8
+    volumes:
+      - ./smsc:/mnt/smsc
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    env_file:
+      - .env
+    environment:
+      - COMPONENT_NAME=smsc
+    depends_on:
+      - dns
+      - mysql
+    expose:
+      - "7090/udp"
+      - "7090/tcp"
+    ports:
+      - "7090:7090/udp"
+      - "7090:7090/tcp"
+    networks:
+      ims_network:
+        ipv4_address: ${SMSC_IP}
+
+networks:
+  ims_network:
+    name: ims_network
+    driver: bridge
+    driver_opts:
+      com.docker.network.bridge.name: br-ims
+    ipam:
+      config:
+        - subnet: ${TEST_NETWORK}
+
+volumes:
+  ims_dbdata:
+    name: ims_dbdata
