@@ -20,6 +20,8 @@
 #    domain: core,sbi,ausf,event,tlv,mem,sock
 #
 logger:
+    level: info
+    domain: upf,pfcp,gtp
     file: /var/log/open5gs/upf.log
 
 global:
@@ -208,6 +210,12 @@ upf:
     session:
         - subnet: 10.45.0.0/16
           gateway: 10.45.0.1
+          dnn: internet
+          dev: ogstun
+        - subnet: 10.46.0.0/16
+          gateway: 10.46.0.1
+          dnn: ims
+          dev: ogstun2
         - subnet: 2001:db8:cafe::/48
           gateway: 2001:db8:cafe::1
     metrics:

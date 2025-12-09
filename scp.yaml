@@ -11,7 +11,7 @@ global:
 scp:
   sbi:
     server:
-      - address: 127.0.0.200
+      - address: 192.168.50.200
         port: 7777
     client:
       nrf:

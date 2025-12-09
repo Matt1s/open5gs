@@ -24,7 +24,7 @@ sepp:
 #      nrf:
 #        - uri: http://127.0.0.10:7777
       scp:
-        - uri: http://127.0.0.200:7777
+        - uri: http://192.168.50.200:7777
   n32:
     server:
       - sender: sepp1.localdomain
@@ -66,7 +66,7 @@ sepp:
 #        port: 7777
 #    client:
 #      scp:
-#        - uri: http://127.0.0.200:7777
+#        - uri: http://192.168.50.200:7777
 #  n32:
 #    server:
 #      - sender: sepp1.localdomain
@@ -83,7 +83,7 @@ sepp:
 #        port: 7777
 #    client:
 #      scp:
-#        - uri: http://127.0.0.200:7777
+#        - uri: http://192.168.50.200:7777
 #  n32:
 #    server:
 #      - sender: sepp1.localdomain
@@ -102,7 +102,7 @@ sepp:
 #        port: 7777
 #    client:
 #      scp:
-#        - uri: http://127.0.0.200:7777
+#        - uri: http://192.168.50.200:7777
 #  n32:
 #    server:
 #      - sender: sepp1.localdomain
@@ -136,7 +136,7 @@ sepp:
 #        port: 7777
 #    client:
 #      scp:
-#        - uri: http://127.0.0.200:7777
+#        - uri: http://192.168.50.200:7777
 #  n32:
 #    server:
 #      - sender: sepp1.localdomain
@@ -166,7 +166,7 @@ sepp:
 #        port: 7777
 #    client:
 #      scp:
-#        - uri: http://127.0.0.200:7777
+#        - uri: http://192.168.50.200:7777
 #  n32:
 #    server:
 #      - sender: sepp1.localdomain
@@ -196,7 +196,7 @@ sepp:
 #        port: 7777
 #    client:
 #      scp:
-#        - uri: http://127.0.0.200:7777
+#        - uri: http://192.168.50.200:7777
 #  n32:
 #    server:
 #      - sender: sepp1.localdomain
@@ -227,7 +227,7 @@ sepp:
 #        port: 7777
 #    client:
 #      scp:
-#        - uri: http://127.0.0.200:7777
+#        - uri: http://192.168.50.200:7777
 #  n32:
 #    server:
 #      - sender: sepp1.localdomain
@@ -252,7 +252,7 @@ sepp:
 #        port: 7777
 #    client:
 #      scp:
-#        - uri: http://127.0.0.200:7777
+#        - uri: http://192.168.50.200:7777
 #  n32:
 #    server:
 #      - sender: sepp1.localdomain

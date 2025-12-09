@@ -18,7 +18,7 @@ udr:
 #      nrf:
 #        - uri: http://127.0.0.10:7777
       scp:
-        - uri: http://127.0.0.200:7777
+        - uri: http://192.168.50.200:7777
 
 ################################################################################
 # SBI Server
@@ -62,7 +62,7 @@ udr:
 #  sbi:
 #    client:
 #      scp:
-#        - uri: http://127.0.0.200:7777
+#        - uri: http://192.168.50.200:7777
 #
 #  o Indirect Communication without Delegation
 #  sbi:
@@ -70,7 +70,7 @@ udr:
 #      nrf:
 #        - uri: http://127.0.0.10:7777
 #      scp:
-#        - uri: http://127.0.0.200:7777
+#        - uri: http://192.168.50.200:7777
 #      delegated:
 #        nrf:
 #          nfm: no    # Directly communicate NRF management functions
@@ -84,7 +84,7 @@ udr:
 #      nrf:
 #        - uri: http://127.0.0.10:7777
 #      scp:
-#        - uri: http://127.0.0.200:7777
+#        - uri: http://192.168.50.200:7777
 #      delegated:
 #        nrf:
 #          nfm: no    # Directly communicate NRF management functions
@@ -98,7 +98,7 @@ udr:
 #      nrf:
 #        - uri: http://127.0.0.10:7777
 #      scp:
-#        - uri: http://127.0.0.200:7777
+#        - uri: http://192.168.50.200:7777
 #      # No 'delegated' section; defaults to AUTO delegation
 #
 ################################################################################

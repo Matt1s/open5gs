@@ -2,7 +2,7 @@ db_uri: mongodb://localhost/open5gs
 logger:
   file:
     path: /var/log/open5gs/pcf.log
-#  level: info   # fatal|error|warn|info(default)|debug|trace
+  level: debug   # fatal|error|warn|info(default)|debug|trace
 
 global:
   max:
@@ -12,17 +12,55 @@ global:
 pcf:
   sbi:
     server:
-      - address: 127.0.0.13
+      - address: 192.168.50.13
         port: 7777
     client:
-#      nrf:
-#        - uri: http://127.0.0.10:7777
-      scp:
-        - uri: http://127.0.0.200:7777
+      nrf:
+        - uri: http://127.0.0.10:7777
+#      scp:
+#        - uri: http://192.168.50.200:7777
   metrics:
     server:
       - address: 192.168.50.5
         port: 50505
+  # policy:
+  #   - plmn_id:
+  #       mcc: 262
+  #       mnc: 01
+  #     slice:
+  #       - sst: 1
+  #         default_indicator: true
+  #         session:
+  #           - name: internet
+  #             type: 3
+  #             ambr:
+  #               downlink:
+  #                 value: 1
+  #                 unit: 3
+  #               uplink:
+  #                 value: 1
+  #                 unit: 3
+  #             qos:
+  #               index: 9
+  #               arp:
+  #                 priority_level: 8
+  #                 pre_emption_vulnerability: 1
+  #                 pre_emption_capability: 1
+  #           - name: ims
+  #             type: 3
+  #             ambr:
+  #               downlink:
+  #                 value: 1
+  #                 unit: 3
+  #               uplink:
+  #                 value: 1
+  #                 unit: 3
+  #             qos:
+  #               index: 5
+  #               arp:
+  #                 priority_level: 1
+  #                 pre_emption_vulnerability: 1
+  #                 pre_emption_capability: 1
 
 ################################################################################
 # PCF Policy Configuration: UE Home PLMN and SUPI Range Based Policies
@@ -199,7 +237,7 @@ pcf:
 #  sbi:
 #    client:
 #      scp:
-#        - uri: http://127.0.0.200:7777
+#        - uri: http://192.168.50.200:7777
 #
 #  o Indirect Communication without Delegation
 #  sbi:
@@ -207,7 +245,7 @@ pcf:
 #      nrf:
 #        - uri: http://127.0.0.10:7777
 #      scp:
-#        - uri: http://127.0.0.200:7777
+#        - uri: http://192.168.50.200:7777
 #      delegated:
 #        nrf:
 #          nfm: no    # Directly communicate NRF management functions
@@ -221,7 +259,7 @@ pcf:
 #      nrf:
 #        - uri: http://127.0.0.10:7777
 #      scp:
-#        - uri: http://127.0.0.200:7777
+#        - uri: http://192.168.50.200:7777
 #      delegated:
 #        nrf:
 #          nfm: no    # Directly communicate NRF management functions
@@ -235,7 +273,7 @@ pcf:
 #      nrf:
 #        - uri: http://127.0.0.10:7777
 #      scp:
-#        - uri: http://127.0.0.200:7777
+#        - uri: http://192.168.50.200:7777
 #      # No 'delegated' section; defaults to AUTO delegation
 #
 ################################################################################

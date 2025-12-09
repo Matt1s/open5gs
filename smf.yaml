@@ -20,7 +20,15 @@
 #    domain: core,sbi,ausf,event,tlv,mem,sock
 #
 logger:
+  level: info
+  domain: smf,pfcp,gtp,session
   file: /var/log/open5gs/smf.log
+
+sbi:
+    server:
+      no_tls: true
+    client:
+      no_tls: true
 
 #
 #  o TLS enable/disable
@@ -607,8 +615,8 @@ smf:
       - address: 192.168.50.4 
         port: 7777
     client:
-      scp:
-        - uri: http://127.0.0.200:7777
+      nrf:
+        - uri: http://127.0.0.10:7777
   pfcp:
     server:
       - address: 192.168.50.4 
@@ -628,14 +636,25 @@ smf:
   session:
     - subnet: 10.45.0.0/16
       gateway: 10.45.0.1
+      dnn: internet
+    - subnet: 10.46.0.0/16
+      gateway: 10.46.0.1
+      dnn: ims
       #    - subnet: 2001:db8:cafe::0/48
       #      gateway: 2001:db8:cafe::1
   dns:
+    - 10.46.0.1
+    - 10.45.0.1
     - 8.8.8.8
-    - 8.8.4.4
-    - 2001:4860:4860::8888
-    - 2001:4860:4860::8844
+  p-cscf:
+    - 10.46.0.1
   mtu: 1400
+  info:
+    - s_nssai:
+        - sst: 1
+          dnn:
+            - internet
+            - ims
         #ctf:
         #enabled: auto
   freeDiameter: /etc/freeDiameter/smf.conf

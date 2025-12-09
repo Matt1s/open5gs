@@ -17,7 +17,7 @@ nssf:
 #      nrf:
 #        - uri: http://127.0.0.10:7777
       scp:
-        - uri: http://127.0.0.200:7777
+        - uri: http://192.168.50.200:7777
       nsi:
         - uri: http://127.0.0.10:7777
           s_nssai:
@@ -87,7 +87,7 @@ nssf:
 #  sbi:
 #    client:
 #      scp:
-#        - uri: http://127.0.0.200:7777
+#        - uri: http://192.168.50.200:7777
 #
 #  o Indirect Communication without Delegation
 #  sbi:
@@ -95,7 +95,7 @@ nssf:
 #      nrf:
 #        - uri: http://127.0.0.10:7777
 #      scp:
-#        - uri: http://127.0.0.200:7777
+#        - uri: http://192.168.50.200:7777
 #      delegated:
 #        nrf:
 #          nfm: no    # Directly communicate NRF management functions
@@ -109,7 +109,7 @@ nssf:
 #      nrf:
 #        - uri: http://127.0.0.10:7777
 #      scp:
-#        - uri: http://127.0.0.200:7777
+#        - uri: http://192.168.50.200:7777
 #      delegated:
 #        nrf:
 #          nfm: no    # Directly communicate NRF management functions
@@ -123,7 +123,7 @@ nssf:
 #      nrf:
 #        - uri: http://127.0.0.10:7777
 #      scp:
-#        - uri: http://127.0.0.200:7777
+#        - uri: http://192.168.50.200:7777
 #      # No 'delegated' section; defaults to AUTO delegation
 #
 #
