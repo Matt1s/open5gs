@@ -47,8 +47,13 @@ fi
 # Use INTERFACE IP for CLI listener instead of parsing /etc/hosts
 LISTEN_CLI="${INTERFACE}:9901"
 
+# IMS interface for UE traffic (ogstun2 gateway)
+IMS_INTERFACE="10.46.0.1"
+
 OPTIONS=""
-OPTIONS="$OPTIONS --interface=$INTERFACE --listen-ng=$LISTEN_NG --listen-cli=$LISTEN_CLI --pidfile=$PIDFILE --port-min=$PORT_MIN --port-max=$PORT_MAX "
+# Add both external interface and IMS interface for proper RTP bridging
+OPTIONS="$OPTIONS --interface=external/${INTERFACE} --interface=internal/${IMS_INTERFACE}"
+OPTIONS="$OPTIONS --listen-ng=$LISTEN_NG --listen-cli=$LISTEN_CLI --pidfile=$PIDFILE --port-min=$PORT_MIN --port-max=$PORT_MAX "
 OPTIONS="$OPTIONS --table=$TABLE  --tos=$TOS --foreground"
 
 if test "$NO_FALLBACK" = "yes" ; then
