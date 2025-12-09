@@ -1,0 +1,421 @@
+# iptables backup - Ut  9. december 2025, 22:38:57 CET
+
+=== FILTER Table ===
+Chain INPUT (policy ACCEPT 76016 packets, 130M bytes)
+num   pkts bytes target     prot opt in     out     source               destination         
+1    15942 6795K rtpengine  udp  --  *      *       0.0.0.0/0            0.0.0.0/0           
+2     5814 1940K ACCEPT     all  --  wlp4s0 *       0.0.0.0/0            0.0.0.0/0           
+3        0     0 ACCEPT     all  --  wlp4s0 *       0.0.0.0/0            0.0.0.0/0           
+4        0     0 ACCEPT     all  --  wlp4s0 *       0.0.0.0/0            0.0.0.0/0           
+5        0     0 ACCEPT     all  --  wlp4s0 *       0.0.0.0/0            0.0.0.0/0           
+6        0     0 ACCEPT     all  --  wlp4s0 *       0.0.0.0/0            0.0.0.0/0           
+7        0     0 ACCEPT     all  --  wlp4s0 *       0.0.0.0/0            0.0.0.0/0           
+8        0     0 ACCEPT     all  --  wlp4s0 *       0.0.0.0/0            0.0.0.0/0           
+9        0     0 ACCEPT     all  --  wlp4s0 *       0.0.0.0/0            0.0.0.0/0           
+10     155 10330 ACCEPT     all  --  ogstun *       0.0.0.0/0            0.0.0.0/0           
+
+Chain FORWARD (policy DROP 0 packets, 0 bytes)
+num   pkts bytes target     prot opt in     out     source               destination         
+1     3711 1654K DOCKER-USER  all  --  *      *       0.0.0.0/0            0.0.0.0/0           
+2     3711 1654K DOCKER-FORWARD  all  --  *      *       0.0.0.0/0            0.0.0.0/0           
+3        0     0 ACCEPT     all  --  ogstun2 *       0.0.0.0/0            0.0.0.0/0           
+4     1688  636K ACCEPT     all  --  ogstun *       0.0.0.0/0            0.0.0.0/0           
+5       63  4750 ACCEPT     all  --  wlp4s0 enx00e04c0266c9  0.0.0.0/0            0.0.0.0/0           
+6       55  9221 ACCEPT     all  --  enx00e04c0266c9 wlp4s0  0.0.0.0/0            0.0.0.0/0            state RELATED,ESTABLISHED
+7        0     0 ACCEPT     all  --  wlp4s0 wlp4s0  0.0.0.0/0            0.0.0.0/0           
+8        0     0 ACCEPT     all  --  wlp4s0 wlp4s0  0.0.0.0/0            0.0.0.0/0           
+9        0     0 ACCEPT     all  --  ogstun2 *       0.0.0.0/0            0.0.0.0/0           
+10       0     0 ACCEPT     all  --  ogstun *       0.0.0.0/0            0.0.0.0/0           
+11       0     0 ACCEPT     all  --  wlp4s0 wlp4s0  0.0.0.0/0            0.0.0.0/0           
+12       0     0 ACCEPT     all  --  wlp4s0 wlp4s0  0.0.0.0/0            0.0.0.0/0           
+13       0     0 ACCEPT     all  --  wlp4s0 wlp4s0  0.0.0.0/0            0.0.0.0/0           
+14       0     0 ACCEPT     all  --  wlp4s0 wlp4s0  0.0.0.0/0            0.0.0.0/0           
+15       0     0 ACCEPT     all  --  wlp4s0 wlp4s0  0.0.0.0/0            0.0.0.0/0           
+16       0     0 ACCEPT     all  --  ogstun2 *       0.0.0.0/0            0.0.0.0/0           
+17       0     0 ACCEPT     all  --  ogstun *       0.0.0.0/0            0.0.0.0/0           
+18       0     0 ACCEPT     all  --  wlp4s0 wlp4s0  0.0.0.0/0            0.0.0.0/0           
+19       0     0 ACCEPT     all  --  ogstun2 *       0.0.0.0/0            0.0.0.0/0           
+20       0     0 ACCEPT     all  --  ogstun *       0.0.0.0/0            0.0.0.0/0           
+21       0     0 ACCEPT     all  --  wlp4s0 wlp4s0  0.0.0.0/0            0.0.0.0/0           
+22       0     0 ACCEPT     all  --  ogstun2 *       0.0.0.0/0            0.0.0.0/0           
+23       0     0 ACCEPT     all  --  ogstun *       0.0.0.0/0            0.0.0.0/0           
+24       0     0 ACCEPT     all  --  wlp4s0 wlp4s0  0.0.0.0/0            0.0.0.0/0           
+25       0     0 ACCEPT     all  --  ogstun2 *       0.0.0.0/0            0.0.0.0/0           
+26       0     0 ACCEPT     all  --  ogstun *       0.0.0.0/0            0.0.0.0/0           
+27       0     0 ACCEPT     all  --  wlp4s0 wlp4s0  0.0.0.0/0            0.0.0.0/0           
+28       0     0 ACCEPT     all  --  wlp4s0 wlp4s0  0.0.0.0/0            0.0.0.0/0           
+29       0     0 ACCEPT     all  --  wlp4s0 wlp4s0  0.0.0.0/0            0.0.0.0/0           
+30       0     0 ACCEPT     all  --  wlp4s0 wlp4s0  0.0.0.0/0            0.0.0.0/0           
+31       0     0 ACCEPT     all  --  wlp4s0 wlp4s0  0.0.0.0/0            0.0.0.0/0           
+32       0     0 ACCEPT     all  --  wlp4s0 wlp4s0  0.0.0.0/0            0.0.0.0/0           
+33       0     0 ACCEPT     all  --  wlp4s0 br-ims  0.0.0.0/0            0.0.0.0/0           
+34       0     0 ACCEPT     all  --  br-ims wlp4s0  0.0.0.0/0            0.0.0.0/0           
+35       0     0 ACCEPT     all  --  ogstun2 br-ims  0.0.0.0/0            0.0.0.0/0           
+36       0     0 ACCEPT     all  --  br-ims ogstun2  0.0.0.0/0            0.0.0.0/0           
+37       0     0 ACCEPT     all  --  ogstun2 br-ims  0.0.0.0/0            0.0.0.0/0           
+38       0     0 ACCEPT     all  --  br-ims ogstun2  0.0.0.0/0            0.0.0.0/0           
+39       0     0 ACCEPT     all  --  wlp4s0 br-ims  0.0.0.0/0            0.0.0.0/0           
+40       0     0 ACCEPT     all  --  br-ims wlp4s0  0.0.0.0/0            0.0.0.0/0           
+41       0     0 ACCEPT     all  --  wlp4s0 wlp4s0  0.0.0.0/0            0.0.0.0/0           
+42       0     0 ACCEPT     all  --  wlp4s0 wlp4s0  0.0.0.0/0            0.0.0.0/0           
+43       0     0 ACCEPT     all  --  ogstun2 br-ims  0.0.0.0/0            0.0.0.0/0           
+44       0     0 ACCEPT     all  --  br-ims ogstun2  0.0.0.0/0            0.0.0.0/0           
+45       0     0 ACCEPT     all  --  *      ogstun2  0.0.0.0/0            0.0.0.0/0           
+46       0     0 ACCEPT     all  --  ogstun2 *       0.0.0.0/0            0.0.0.0/0           
+47       0     0 ACCEPT     all  --  ogstun enx00e04c0266c9  0.0.0.0/0            0.0.0.0/0           
+48    1905 1005K ACCEPT     all  --  enx00e04c0266c9 ogstun  0.0.0.0/0            0.0.0.0/0            state RELATED,ESTABLISHED
+49       0     0 ACCEPT     all  --  wlp4s0 wlp4s0  0.0.0.0/0            0.0.0.0/0           
+50       0     0 ACCEPT     all  --  wlp4s0 wlp4s0  0.0.0.0/0            0.0.0.0/0           
+51       0     0 ACCEPT     all  --  wlp4s0 wlp4s0  0.0.0.0/0            0.0.0.0/0           
+52       0     0 ACCEPT     all  --  wlp4s0 wlp4s0  0.0.0.0/0            0.0.0.0/0           
+53       0     0 ACCEPT     all  --  wlp4s0 wlp4s0  0.0.0.0/0            0.0.0.0/0           
+54       0     0 ACCEPT     all  --  wlp4s0 wlp4s0  0.0.0.0/0            0.0.0.0/0           
+55       0     0 ACCEPT     all  --  wlp4s0 wlp4s0  0.0.0.0/0            0.0.0.0/0           
+56       0     0 ACCEPT     all  --  wlp4s0 wlp4s0  0.0.0.0/0            0.0.0.0/0           
+57       0     0 ACCEPT     all  --  ogstun enx00e04c0266c9  0.0.0.0/0            0.0.0.0/0           
+58       0     0 ACCEPT     all  --  enx00e04c0266c9 ogstun  0.0.0.0/0            0.0.0.0/0            state RELATED,ESTABLISHED
+59       0     0 ACCEPT     all  --  wlp4s0 br-fb3d302742bd  0.0.0.0/0            0.0.0.0/0           
+60       0     0 ACCEPT     all  --  br-fb3d302742bd wlp4s0  0.0.0.0/0            0.0.0.0/0           
+61       0     0 ACCEPT     all  --  wlp4s0 wlp4s0  0.0.0.0/0            0.0.0.0/0           
+62       0     0 ACCEPT     all  --  wlp4s0 br-d224a7901b89  0.0.0.0/0            0.0.0.0/0           
+63       0     0 ACCEPT     all  --  br-d224a7901b89 wlp4s0  0.0.0.0/0            0.0.0.0/0           
+64       0     0 ACCEPT     all  --  wlp4s0 wlp4s0  0.0.0.0/0            0.0.0.0/0           
+65       0     0 ACCEPT     all  --  wlp4s0 br-89d0804f0601  0.0.0.0/0            0.0.0.0/0           
+66       0     0 ACCEPT     all  --  br-89d0804f0601 wlp4s0  0.0.0.0/0            0.0.0.0/0           
+67       0     0 ACCEPT     all  --  wlp4s0 wlp4s0  0.0.0.0/0            0.0.0.0/0           
+68       0     0 ACCEPT     all  --  wlp4s0 br-6f10a2c5c49e  0.0.0.0/0            0.0.0.0/0           
+69       0     0 ACCEPT     all  --  br-6f10a2c5c49e wlp4s0  0.0.0.0/0            0.0.0.0/0           
+70       0     0 ACCEPT     all  --  wlp4s0 wlp4s0  0.0.0.0/0            0.0.0.0/0           
+71       0     0 ACCEPT     all  --  wlp4s0 br-dadfdcaa32b2  0.0.0.0/0            0.0.0.0/0           
+72       0     0 ACCEPT     all  --  br-dadfdcaa32b2 wlp4s0  0.0.0.0/0            0.0.0.0/0           
+73       0     0 ACCEPT     all  --  wlp4s0 wlp4s0  0.0.0.0/0            0.0.0.0/0           
+74       0     0 ACCEPT     all  --  wlp4s0 wlp4s0  0.0.0.0/0            0.0.0.0/0           
+75       0     0 ACCEPT     all  --  wlp4s0 wlp4s0  0.0.0.0/0            0.0.0.0/0           
+76       0     0 ACCEPT     all  --  wlp4s0 br-f9ce8bf4e761  0.0.0.0/0            0.0.0.0/0           
+77       0     0 ACCEPT     all  --  br-f9ce8bf4e761 wlp4s0  0.0.0.0/0            0.0.0.0/0           
+78       0     0 ACCEPT     all  --  wlp4s0 wlp4s0  0.0.0.0/0            0.0.0.0/0           
+79       0     0 ACCEPT     all  --  wlp4s0 br-a8b8d45023fe  0.0.0.0/0            0.0.0.0/0           
+80       0     0 ACCEPT     all  --  br-a8b8d45023fe wlp4s0  0.0.0.0/0            0.0.0.0/0           
+81       0     0 ACCEPT     all  --  wlp4s0 wlp4s0  0.0.0.0/0            0.0.0.0/0           
+82       0     0 ACCEPT     all  --  wlp4s0 br-06a0ba787104  0.0.0.0/0            0.0.0.0/0           
+83       0     0 ACCEPT     all  --  br-06a0ba787104 wlp4s0  0.0.0.0/0            0.0.0.0/0           
+84       0     0 ACCEPT     all  --  br-06a0ba787104 ogstun2  0.0.0.0/0            0.0.0.0/0            state RELATED,ESTABLISHED
+85       0     0 ACCEPT     all  --  ogstun2 br-06a0ba787104  0.0.0.0/0            0.0.0.0/0           
+86       0     0 ACCEPT     all  --  wlp4s0 wlp4s0  0.0.0.0/0            0.0.0.0/0           
+87       0     0 ACCEPT     udp  --  br-06a0ba787104 wlp4s0  0.0.0.0/0            0.0.0.0/0            udp dpt:8805
+88       0     0 ACCEPT     udp  --  wlp4s0 br-06a0ba787104  0.0.0.0/0            0.0.0.0/0            udp spt:8805
+89       0     0 ACCEPT     all  --  ogstun2 br-06a0ba787104  0.0.0.0/0            0.0.0.0/0           
+90       0     0 ACCEPT     all  --  br-06a0ba787104 ogstun2  0.0.0.0/0            0.0.0.0/0            state RELATED,ESTABLISHED
+91       0     0 ACCEPT     all  --  wlp4s0 wlp4s0  0.0.0.0/0            0.0.0.0/0           
+92       0     0 ACCEPT     all  --  wlp4s0 wlp4s0  0.0.0.0/0            0.0.0.0/0           
+93       0     0 ACCEPT     all  --  wlp4s0 wlp4s0  0.0.0.0/0            0.0.0.0/0           
+94       0     0 ACCEPT     all  --  wlp4s0 wlp4s0  0.0.0.0/0            0.0.0.0/0           
+95       0     0 ACCEPT     all  --  wlp4s0 br-e2ec22540492  0.0.0.0/0            0.0.0.0/0           
+96       0     0 ACCEPT     all  --  br-e2ec22540492 wlp4s0  0.0.0.0/0            0.0.0.0/0           
+97       0     0 ACCEPT     all  --  wlp4s0 wlp4s0  0.0.0.0/0            0.0.0.0/0           
+98       0     0 ACCEPT     all  --  wlp4s0 br-0dda181278a8  0.0.0.0/0            0.0.0.0/0           
+99       0     0 ACCEPT     all  --  br-0dda181278a8 wlp4s0  0.0.0.0/0            0.0.0.0/0           
+100      0     0 ACCEPT     udp  --  br-0dda181278a8 wlp4s0  0.0.0.0/0            0.0.0.0/0            udp dpt:8805
+101      0     0 ACCEPT     udp  --  wlp4s0 br-0dda181278a8  0.0.0.0/0            0.0.0.0/0            udp spt:8805
+102      0     0 ACCEPT     all  --  wlp4s0 wlp4s0  0.0.0.0/0            0.0.0.0/0           
+103      0     0 ACCEPT     all  --  wlp4s0 wlp4s0  0.0.0.0/0            0.0.0.0/0           
+104      0     0 ACCEPT     all  --  ogstun2 br-0dda181278a8  0.0.0.0/0            0.0.0.0/0           
+105      0     0 ACCEPT     all  --  br-0dda181278a8 ogstun2  0.0.0.0/0            0.0.0.0/0            state RELATED,ESTABLISHED
+106      0     0 ACCEPT     all  --  wlp4s0 wlp4s0  0.0.0.0/0            0.0.0.0/0           
+107      0     0 ACCEPT     all  --  wlp4s0 wlp4s0  0.0.0.0/0            0.0.0.0/0           
+108      0     0 ACCEPT     all  --  wlp4s0 wlp4s0  0.0.0.0/0            0.0.0.0/0           
+109      0     0 ACCEPT     all  --  wlp4s0 wlp4s0  0.0.0.0/0            0.0.0.0/0           
+110      0     0 ACCEPT     all  --  wlp4s0 br-5dc4e7cd95f6  0.0.0.0/0            0.0.0.0/0           
+111      0     0 ACCEPT     all  --  br-5dc4e7cd95f6 wlp4s0  0.0.0.0/0            0.0.0.0/0           
+112      0     0 ACCEPT     all  --  wlp4s0 wlp4s0  0.0.0.0/0            0.0.0.0/0           
+113      0     0 ACCEPT     all  --  wlp4s0 br-5dc4e7cd95f6  0.0.0.0/0            0.0.0.0/0            /* Hotspot to Docker */
+114      0     0 ACCEPT     all  --  br-5dc4e7cd95f6 wlp4s0  0.0.0.0/0            0.0.0.0/0            /* Docker to Hotspot */
+115      0     0 ACCEPT     udp  --  *      *       172.22.0.7           192.168.56.1         udp dpt:8805 /* PFCP SMF to UPF requests */
+116      0     0 ACCEPT     udp  --  *      *       192.168.56.1         172.22.0.7           udp spt:8805 /* PFCP UPF to SMF responses */
+117      0     0 ACCEPT     all  --  br-5dc4e7cd95f6 ogstun2  0.0.0.0/0            0.0.0.0/0            state RELATED,ESTABLISHED
+118      0     0 ACCEPT     all  --  ogstun2 br-5dc4e7cd95f6  0.0.0.0/0            0.0.0.0/0           
+119      0     0 ACCEPT     all  --  wlp4s0 wlp4s0  0.0.0.0/0            0.0.0.0/0           
+120      0     0 ACCEPT     all  --  wlp4s0 br-b663449b9dad  0.0.0.0/0            0.0.0.0/0           
+121      0     0 ACCEPT     all  --  br-b663449b9dad wlp4s0  0.0.0.0/0            0.0.0.0/0           
+122      0     0 ACCEPT     all  --  wlp4s0 wlp4s0  0.0.0.0/0            0.0.0.0/0           
+123      0     0 ACCEPT     all  --  wlp4s0 br-9c124b01b788  0.0.0.0/0            0.0.0.0/0           
+124      0     0 ACCEPT     all  --  br-9c124b01b788 wlp4s0  0.0.0.0/0            0.0.0.0/0           
+125      0     0 ACCEPT     all  --  br-9c124b01b788 ogstun2  0.0.0.0/0            0.0.0.0/0            state RELATED,ESTABLISHED
+126      0     0 ACCEPT     all  --  ogstun2 br-9c124b01b788  0.0.0.0/0            0.0.0.0/0           
+127      0     0 ACCEPT     all  --  wlp4s0 wlp4s0  0.0.0.0/0            0.0.0.0/0           
+128      0     0 ACCEPT     all  --  wlp4s0 br-9c124b01b788  0.0.0.0/0            0.0.0.0/0            /* Hotspot to Docker */
+129      0     0 ACCEPT     all  --  br-9c124b01b788 wlp4s0  0.0.0.0/0            0.0.0.0/0            /* Docker to Hotspot */
+130      0     0 ACCEPT     udp  --  *      *       172.22.0.7           192.168.56.1         udp dpt:8805 /* PFCP SMF to UPF requests */
+131      0     0 ACCEPT     udp  --  *      *       192.168.56.1         172.22.0.7           udp spt:8805 /* PFCP UPF to SMF responses */
+132      0     0 ACCEPT     all  --  wlp4s0 wlp4s0  0.0.0.0/0            0.0.0.0/0           
+133      0     0 ACCEPT     all  --  wlp4s0 br-32eb4d161d19  0.0.0.0/0            0.0.0.0/0           
+134      0     0 ACCEPT     all  --  br-32eb4d161d19 wlp4s0  0.0.0.0/0            0.0.0.0/0           
+135      0     0 ACCEPT     all  --  wlp4s0 wlp4s0  0.0.0.0/0            0.0.0.0/0           
+136      0     0 ACCEPT     all  --  wlp4s0 br-451b42f23a7c  0.0.0.0/0            0.0.0.0/0           
+137      0     0 ACCEPT     all  --  br-451b42f23a7c wlp4s0  0.0.0.0/0            0.0.0.0/0           
+138      0     0 ACCEPT     all  --  wlp4s0 br-855e672a9f51  0.0.0.0/0            0.0.0.0/0           
+139      0     0 ACCEPT     all  --  br-855e672a9f51 wlp4s0  0.0.0.0/0            0.0.0.0/0           
+140      0     0 ACCEPT     all  --  wlp4s0 wlp4s0  0.0.0.0/0            0.0.0.0/0           
+141      0     0 ACCEPT     all  --  wlp4s0 wlp4s0  0.0.0.0/0            0.0.0.0/0           
+142      0     0 ACCEPT     all  --  wlp4s0 wlp4s0  0.0.0.0/0            0.0.0.0/0           
+143      0     0 ACCEPT     all  --  wlp4s0 wlp4s0  0.0.0.0/0            0.0.0.0/0           
+144      0     0 ACCEPT     all  --  wlp4s0 wlp4s0  0.0.0.0/0            0.0.0.0/0           
+145      0     0 ACCEPT     all  --  wlp4s0 br-9dad05cf07c4  0.0.0.0/0            0.0.0.0/0           
+146      0     0 ACCEPT     all  --  br-9dad05cf07c4 wlp4s0  0.0.0.0/0            0.0.0.0/0           
+147      0     0 ACCEPT     all  --  wlp4s0 wlp4s0  0.0.0.0/0            0.0.0.0/0           
+148      0     0 ACCEPT     all  --  wlp4s0 wlp4s0  0.0.0.0/0            0.0.0.0/0           
+149      0     0 ACCEPT     all  --  wlp4s0 wlp4s0  0.0.0.0/0            0.0.0.0/0           
+150      0     0 ACCEPT     all  --  wlp4s0 wlp4s0  0.0.0.0/0            0.0.0.0/0           
+151      0     0 ACCEPT     all  --  wlp4s0 wlp4s0  0.0.0.0/0            0.0.0.0/0           
+152      0     0 ACCEPT     all  --  wlp4s0 wlp4s0  0.0.0.0/0            0.0.0.0/0           
+153      0     0 ACCEPT     all  --  wlp4s0 wlp4s0  0.0.0.0/0            0.0.0.0/0           
+154      0     0 ACCEPT     all  --  wlp4s0 wlp4s0  0.0.0.0/0            0.0.0.0/0           
+155      0     0 ACCEPT     all  --  wlp4s0 wlp4s0  0.0.0.0/0            0.0.0.0/0           
+156      0     0 ACCEPT     all  --  wlp4s0 wlp4s0  0.0.0.0/0            0.0.0.0/0           
+157      0     0 ACCEPT     all  --  wlp4s0 wlp4s0  0.0.0.0/0            0.0.0.0/0           
+158      0     0 ACCEPT     all  --  wlp4s0 wlp4s0  0.0.0.0/0            0.0.0.0/0           
+159      0     0 ACCEPT     all  --  wlp4s0 wlp4s0  0.0.0.0/0            0.0.0.0/0           
+160      0     0 ACCEPT     all  --  ogstun enx00e04c0266c9  0.0.0.0/0            0.0.0.0/0           
+161      0     0 ACCEPT     all  --  enx00e04c0266c9 ogstun  0.0.0.0/0            0.0.0.0/0            state RELATED,ESTABLISHED
+162      0     0 ACCEPT     all  --  enx00e04c0266c9 ogstun  0.0.0.0/0            0.0.0.0/0            state RELATED,ESTABLISHED
+163      0     0 ACCEPT     all  --  ogstun enx00e04c0266c9  0.0.0.0/0            0.0.0.0/0           
+164      0     0 ACCEPT     all  --  *      wlp4s0  172.22.0.0/24        0.0.0.0/0           
+165      0     0 ACCEPT     all  --  wlp4s0 *       0.0.0.0/0            172.22.0.0/24       
+166      0     0 ACCEPT     all  --  wlp4s0 wlp4s0  0.0.0.0/0            0.0.0.0/0           
+167      0     0 ACCEPT     all  --  wlp4s0 wlp4s0  0.0.0.0/0            0.0.0.0/0           
+168      0     0 ACCEPT     all  --  wlp4s0 *       0.0.0.0/0            0.0.0.0/0            state RELATED,ESTABLISHED
+169      0     0 ACCEPT     all  --  wlp4s0 wlp4s0  0.0.0.0/0            0.0.0.0/0           
+170      0     0 ACCEPT     all  --  ogstun enx00e04c0266c9  0.0.0.0/0            0.0.0.0/0           
+171      0     0 ACCEPT     all  --  enx00e04c0266c9 ogstun  0.0.0.0/0            0.0.0.0/0            state RELATED,ESTABLISHED
+172      0     0 ACCEPT     all  --  wlp4s0 *       0.0.0.0/0            0.0.0.0/0            state RELATED,ESTABLISHED
+173      0     0 ACCEPT     all  --  wlp4s0 wlp4s0  0.0.0.0/0            0.0.0.0/0           
+174      0     0 ACCEPT     all  --  wlp4s0 wlp4s0  0.0.0.0/0            0.0.0.0/0           
+175      0     0 ACCEPT     all  --  ogstun enx00e04c0266c9  0.0.0.0/0            0.0.0.0/0           
+176      0     0 ACCEPT     all  --  enx00e04c0266c9 ogstun  0.0.0.0/0            0.0.0.0/0            state RELATED,ESTABLISHED
+177      0     0 ACCEPT     all  --  ogstun enx00e04c0266c9  0.0.0.0/0            0.0.0.0/0           
+178      0     0 ACCEPT     all  --  enx00e04c0266c9 ogstun  0.0.0.0/0            0.0.0.0/0            state RELATED,ESTABLISHED
+179      0     0 ACCEPT     all  --  ogstun enx00e04c0266c9  0.0.0.0/0            0.0.0.0/0           
+180      0     0 ACCEPT     all  --  enx00e04c0266c9 ogstun  0.0.0.0/0            0.0.0.0/0            state RELATED,ESTABLISHED
+181      0     0 ACCEPT     all  --  ogstun enx00e04c0266c9  0.0.0.0/0            0.0.0.0/0           
+182      0     0 ACCEPT     all  --  enx00e04c0266c9 ogstun  0.0.0.0/0            0.0.0.0/0            state RELATED,ESTABLISHED
+183      0     0 ACCEPT     all  --  ogstun enx00e04c0266c9  0.0.0.0/0            0.0.0.0/0           
+184      0     0 ACCEPT     all  --  enx00e04c0266c9 ogstun  0.0.0.0/0            0.0.0.0/0            state RELATED,ESTABLISHED
+185      0     0 ACCEPT     all  --  ogstun enx00e04c0266c9  0.0.0.0/0            0.0.0.0/0           
+186      0     0 ACCEPT     all  --  enx00e04c0266c9 ogstun  0.0.0.0/0            0.0.0.0/0            state RELATED,ESTABLISHED
+187      0     0 ACCEPT     all  --  ogstun enx00e04c0266c9  0.0.0.0/0            0.0.0.0/0           
+188      0     0 ACCEPT     all  --  enx00e04c0266c9 ogstun  0.0.0.0/0            0.0.0.0/0            state RELATED,ESTABLISHED
+189      0     0 ACCEPT     all  --  ogstun enx00e04c0266c9  0.0.0.0/0            0.0.0.0/0           
+190      0     0 ACCEPT     all  --  enx00e04c0266c9 ogstun  0.0.0.0/0            0.0.0.0/0            state RELATED,ESTABLISHED
+191      0     0 ACCEPT     all  --  ogstun enx00e04c0266c9  0.0.0.0/0            0.0.0.0/0           
+192      0     0 ACCEPT     all  --  enx00e04c0266c9 ogstun  0.0.0.0/0            0.0.0.0/0            state RELATED,ESTABLISHED
+193      0     0 ACCEPT     all  --  ogstun enx00e04c0266c9  0.0.0.0/0            0.0.0.0/0           
+194      0     0 ACCEPT     all  --  enx00e04c0266c9 ogstun  0.0.0.0/0            0.0.0.0/0            state RELATED,ESTABLISHED
+195      0     0 ACCEPT     all  --  ogstun enx00e04c0266c9  0.0.0.0/0            0.0.0.0/0           
+196      0     0 ACCEPT     all  --  enx00e04c0266c9 ogstun  0.0.0.0/0            0.0.0.0/0            state RELATED,ESTABLISHED
+197      0     0 ACCEPT     all  --  ogstun enx00e04c0266c9  0.0.0.0/0            0.0.0.0/0           
+198      0     0 ACCEPT     all  --  enx00e04c0266c9 ogstun  0.0.0.0/0            0.0.0.0/0            state RELATED,ESTABLISHED
+199      0     0 ACCEPT     all  --  ogstun enx00e04c0266c9  0.0.0.0/0            0.0.0.0/0           
+200      0     0 ACCEPT     all  --  enx00e04c0266c9 ogstun  0.0.0.0/0            0.0.0.0/0            state RELATED,ESTABLISHED
+201      0     0 ACCEPT     all  --  ogstun enx00e04c0266c9  0.0.0.0/0            0.0.0.0/0           
+202      0     0 ACCEPT     all  --  enx00e04c0266c9 ogstun  0.0.0.0/0            0.0.0.0/0            state RELATED,ESTABLISHED
+203      0     0 ACCEPT     all  --  ogstun enx00e04c0266c9  0.0.0.0/0            0.0.0.0/0           
+204      0     0 ACCEPT     all  --  enx00e04c0266c9 ogstun  0.0.0.0/0            0.0.0.0/0            state RELATED,ESTABLISHED
+205      0     0 ACCEPT     all  --  ogstun enx00e04c0266c9  0.0.0.0/0            0.0.0.0/0           
+206      0     0 ACCEPT     all  --  enx00e04c0266c9 ogstun  0.0.0.0/0            0.0.0.0/0            state RELATED,ESTABLISHED
+207      0     0 ACCEPT     all  --  ogstun enx00e04c0266c9  0.0.0.0/0            0.0.0.0/0           
+208      0     0 ACCEPT     all  --  enx00e04c0266c9 ogstun  0.0.0.0/0            0.0.0.0/0            state RELATED,ESTABLISHED
+209      0     0 ACCEPT     all  --  ogstun enx00e04c0266c9  0.0.0.0/0            0.0.0.0/0           
+210      0     0 ACCEPT     all  --  enx00e04c0266c9 ogstun  0.0.0.0/0            0.0.0.0/0            state RELATED,ESTABLISHED
+
+Chain OUTPUT (policy ACCEPT 71563 packets, 23M bytes)
+num   pkts bytes target     prot opt in     out     source               destination         
+1     6741 2094K ACCEPT     all  --  *      wlp4s0  0.0.0.0/0            0.0.0.0/0           
+2        0     0 ACCEPT     all  --  *      wlp4s0  0.0.0.0/0            0.0.0.0/0           
+3        0     0 ACCEPT     all  --  *      wlp4s0  0.0.0.0/0            0.0.0.0/0           
+4        0     0 ACCEPT     all  --  *      wlp4s0  0.0.0.0/0            0.0.0.0/0           
+5        0     0 ACCEPT     all  --  *      wlp4s0  0.0.0.0/0            0.0.0.0/0           
+6        0     0 ACCEPT     all  --  *      wlp4s0  0.0.0.0/0            0.0.0.0/0           
+7        0     0 ACCEPT     all  --  *      wlp4s0  0.0.0.0/0            0.0.0.0/0           
+8        0     0 ACCEPT     all  --  *      wlp4s0  0.0.0.0/0            0.0.0.0/0           
+
+Chain DOCKER (2 references)
+num   pkts bytes target     prot opt in     out     source               destination         
+1        0     0 ACCEPT     udp  --  !br-ims br-ims  0.0.0.0/0            172.22.0.19          udp dpt:4060
+2        0     0 ACCEPT     tcp  --  !br-ims br-ims  0.0.0.0/0            172.22.0.19          tcp dpt:4060
+3        0     0 ACCEPT     sctp --  !br-ims br-ims  0.0.0.0/0            172.22.0.19          sctp dpt:3869
+4        0     0 ACCEPT     tcp  --  !br-ims br-ims  0.0.0.0/0            172.22.0.19          tcp dpt:3869
+5        0     0 ACCEPT     udp  --  !br-ims br-ims  0.0.0.0/0            172.22.0.20          udp dpt:6060
+6        0     0 ACCEPT     tcp  --  !br-ims br-ims  0.0.0.0/0            172.22.0.20          tcp dpt:6060
+7        0     0 ACCEPT     sctp --  !br-ims br-ims  0.0.0.0/0            172.22.0.20          sctp dpt:3870
+8        0     0 ACCEPT     tcp  --  !br-ims br-ims  0.0.0.0/0            172.22.0.20          tcp dpt:3870
+9        0     0 ACCEPT     tcp  --  !br-ims br-ims  0.0.0.0/0            172.22.0.18          tcp dpt:8080
+10       0     0 ACCEPT     sctp --  !br-ims br-ims  0.0.0.0/0            172.22.0.18          sctp dpt:3875
+11       0     0 ACCEPT     tcp  --  !br-ims br-ims  0.0.0.0/0            172.22.0.18          tcp dpt:3875
+12       0     0 ACCEPT     udp  --  !br-ims br-ims  0.0.0.0/0            172.22.0.33          udp dpt:7090
+13       0     0 ACCEPT     tcp  --  !br-ims br-ims  0.0.0.0/0            172.22.0.33          tcp dpt:7090
+14       0     0 DROP       all  --  !br-ims br-ims  0.0.0.0/0            0.0.0.0/0           
+15       0     0 DROP       all  --  !docker0 docker0  0.0.0.0/0            0.0.0.0/0           
+
+Chain DOCKER-BRIDGE (1 references)
+num   pkts bytes target     prot opt in     out     source               destination         
+1        0     0 DOCKER     all  --  *      br-ims  0.0.0.0/0            0.0.0.0/0           
+2        0     0 DOCKER     all  --  *      docker0  0.0.0.0/0            0.0.0.0/0           
+
+Chain DOCKER-CT (1 references)
+num   pkts bytes target     prot opt in     out     source               destination         
+1        0     0 ACCEPT     all  --  *      br-ims  0.0.0.0/0            0.0.0.0/0            ctstate RELATED,ESTABLISHED
+2        0     0 ACCEPT     all  --  *      docker0  0.0.0.0/0            0.0.0.0/0            ctstate RELATED,ESTABLISHED
+
+Chain DOCKER-FORWARD (1 references)
+num   pkts bytes target     prot opt in     out     source               destination         
+1     3711 1654K DOCKER-CT  all  --  *      *       0.0.0.0/0            0.0.0.0/0           
+2     3711 1654K DOCKER-INTERNAL  all  --  *      *       0.0.0.0/0            0.0.0.0/0           
+3     3711 1654K DOCKER-BRIDGE  all  --  *      *       0.0.0.0/0            0.0.0.0/0           
+4        0     0 ACCEPT     all  --  br-ims *       0.0.0.0/0            0.0.0.0/0           
+5        0     0 ACCEPT     all  --  docker0 *       0.0.0.0/0            0.0.0.0/0           
+
+Chain DOCKER-INTERNAL (1 references)
+num   pkts bytes target     prot opt in     out     source               destination         
+
+Chain DOCKER-USER (1 references)
+num   pkts bytes target     prot opt in     out     source               destination         
+1        0     0 ACCEPT     all  --  br-06a0ba787104 ogstun2  0.0.0.0/0            0.0.0.0/0           
+2        0     0 ACCEPT     all  --  ogstun2 br-06a0ba787104  0.0.0.0/0            0.0.0.0/0           
+3        0     0 ACCEPT     udp  --  *      *       172.22.0.7           192.168.56.1         udp dpt:8805
+4        0     0 ACCEPT     udp  --  *      *       192.168.56.1         172.22.0.7           udp spt:8805
+5        0     0 ACCEPT     all  --  ogstun2 br-06a0ba787104  0.0.0.0/0            0.0.0.0/0           
+6        0     0 ACCEPT     all  --  br-06a0ba787104 ogstun2  0.0.0.0/0            0.0.0.0/0           
+7        0     0 ACCEPT     all  --  wlp4s0 br-06a0ba787104  0.0.0.0/0            0.0.0.0/0           
+8        0     0 ACCEPT     all  --  br-06a0ba787104 wlp4s0  0.0.0.0/0            0.0.0.0/0           
+9        0     0 ACCEPT     all  --  ogstun2 br-0dda181278a8  0.0.0.0/0            0.0.0.0/0           
+10       0     0 ACCEPT     all  --  br-0dda181278a8 ogstun2  0.0.0.0/0            0.0.0.0/0           
+11       0     0 ACCEPT     all  --  wlp4s0 br-0dda181278a8  0.0.0.0/0            0.0.0.0/0           
+12       0     0 ACCEPT     all  --  br-0dda181278a8 wlp4s0  0.0.0.0/0            0.0.0.0/0           
+13       0     0 ACCEPT     all  --  wlp4s0 br-0dda181278a8  0.0.0.0/0            0.0.0.0/0           
+14       0     0 ACCEPT     all  --  br-0dda181278a8 wlp4s0  0.0.0.0/0            0.0.0.0/0           
+15       0     0 ACCEPT     all  --  wlp4s0 br-0dda181278a8  0.0.0.0/0            0.0.0.0/0           
+16       0     0 ACCEPT     all  --  br-0dda181278a8 wlp4s0  0.0.0.0/0            0.0.0.0/0           
+17       0     0 ACCEPT     udp  --  *      *       192.168.56.1         172.22.0.0/24        /* UPF to Docker UDP */
+18       0     0 ACCEPT     udp  --  *      *       172.22.0.0/24        192.168.56.1         /* Docker to UPF UDP */
+19       0     0 ACCEPT     udp  --  *      *       172.22.0.7           192.168.56.1         udp dpt:8805 /* PFCP SMF to UPF requests */
+20       0     0 ACCEPT     udp  --  *      *       192.168.56.1         172.22.0.7           udp spt:8805 /* PFCP UPF to SMF responses */
+21       0     0 ACCEPT     all  --  br-5dc4e7cd95f6 ogstun2  0.0.0.0/0            0.0.0.0/0           
+22       0     0 ACCEPT     all  --  ogstun2 br-5dc4e7cd95f6  0.0.0.0/0            0.0.0.0/0           
+23       0     0 ACCEPT     all  --  br-9c124b01b788 ogstun2  0.0.0.0/0            0.0.0.0/0           
+24       0     0 ACCEPT     all  --  ogstun2 br-9c124b01b788  0.0.0.0/0            0.0.0.0/0           
+25       0     0 ACCEPT     udp  --  *      *       192.168.56.1         172.22.0.0/24        /* UPF to Docker UDP */
+26       0     0 ACCEPT     udp  --  *      *       172.22.0.0/24        192.168.56.1         /* Docker to UPF UDP */
+27       0     0 ACCEPT     udp  --  *      *       172.22.0.7           192.168.56.1         udp dpt:8805 /* PFCP SMF to UPF requests */
+28       0     0 ACCEPT     udp  --  *      *       192.168.56.1         172.22.0.7           udp spt:8805 /* PFCP UPF to SMF responses */
+29    3711 1654K RETURN     all  --  *      *       0.0.0.0/0            0.0.0.0/0           
+
+Chain rtpengine (1 references)
+num   pkts bytes target     prot opt in     out     source               destination         
+
+=== NAT Table ===
+Chain PREROUTING (policy ACCEPT 770 packets, 146K bytes)
+num   pkts bytes target     prot opt in     out     source               destination         
+1        0     0 ACCEPT     udp  --  *      *       0.0.0.0/0            192.168.50.21        udp dpt:5060
+2      286 42772 DOCKER     all  --  *      *       0.0.0.0/0            0.0.0.0/0            ADDRTYPE match dst-type LOCAL
+
+Chain INPUT (policy ACCEPT 593 packets, 93944 bytes)
+num   pkts bytes target     prot opt in     out     source               destination         
+
+Chain OUTPUT (policy ACCEPT 5715 packets, 506K bytes)
+num   pkts bytes target     prot opt in     out     source               destination         
+1      752 79480 DOCKER     all  --  *      *       0.0.0.0/0           !127.0.0.0/8          ADDRTYPE match dst-type LOCAL
+
+Chain POSTROUTING (policy ACCEPT 5674 packets, 496K bytes)
+num   pkts bytes target     prot opt in     out     source               destination         
+1        0     0 MASQUERADE  all  --  *      enx00e04c0266c9  192.168.50.0/24      0.0.0.0/0           
+2        0     0 MASQUERADE  all  --  *      !docker0  172.17.0.0/16        0.0.0.0/0           
+3        0     0 MASQUERADE  all  --  *      !br-ims  172.22.0.0/24        0.0.0.0/0           
+4        0     0 MASQUERADE  all  --  *      enx00e04c0266c9  192.168.56.0/24      0.0.0.0/0           
+5       13  1193 MASQUERADE  all  --  *      !br-b3e662ee1e47  172.22.0.0/24        0.0.0.0/0           
+6        0     0 MASQUERADE  all  --  *      !br-fb3d302742bd  172.22.0.0/24        0.0.0.0/0           
+7        0     0 MASQUERADE  all  --  *      !br-d224a7901b89  172.22.0.0/24        0.0.0.0/0           
+8        0     0 MASQUERADE  all  --  *      !br-89d0804f0601  172.22.0.0/24        0.0.0.0/0           
+9        0     0 MASQUERADE  all  --  *      !br-6f10a2c5c49e  172.22.0.0/24        0.0.0.0/0           
+10       0     0 MASQUERADE  all  --  *      !br-dadfdcaa32b2  172.22.0.0/24        0.0.0.0/0           
+11       0     0 MASQUERADE  all  --  *      !br-f9ce8bf4e761  172.22.0.0/24        0.0.0.0/0           
+12       0     0 MASQUERADE  all  --  *      !br-a8b8d45023fe  172.22.0.0/24        0.0.0.0/0           
+13       0     0 ACCEPT     all  --  *      br-06a0ba787104  10.46.0.0/16         172.22.0.0/24       
+14       0     0 ACCEPT     all  --  *      ogstun2  172.22.0.0/24        10.46.0.0/16         /* IMS return: P-CSCF to UE */
+15       0     0 ACCEPT     all  --  *      br-06a0ba787104  10.46.0.0/16         172.22.0.0/24       
+16       0     0 RETURN     udp  --  *      *       172.22.0.7           192.168.56.1         udp dpt:8805 /* PFCP: SMF to UPF */
+17       0     0 RETURN     udp  --  *      *       192.168.56.1         172.22.0.7           udp spt:8805 /* PFCP: UPF to SMF */
+18       0     0 MASQUERADE  all  --  *      !br-06a0ba787104  172.22.0.0/24        0.0.0.0/0           
+19       0     0 MASQUERADE  all  --  *      !br-e2ec22540492  172.22.0.0/24        0.0.0.0/0           
+20       0     0 ACCEPT     all  --  *      ogstun2  172.22.0.0/24        10.46.0.0/16         /* IMS return: P-CSCF to UE */
+21       0     0 ACCEPT     all  --  *      br-0dda181278a8  10.46.0.0/16         172.22.0.0/24       
+22       0     0 ACCEPT     all  --  *      ogstun2  172.22.0.0/24        10.46.0.0/16         /* IMS return: P-CSCF to UE */
+23       0     0 ACCEPT     all  --  *      ogstun2  172.22.0.0/24        10.46.0.0/16         /* IMS return: P-CSCF to UE */
+24       0     0 MASQUERADE  all  --  *      !br-0dda181278a8  172.22.0.0/24        0.0.0.0/0           
+25       0     0 ACCEPT     all  --  *      br-5dc4e7cd95f6  10.46.0.0/16         172.22.0.0/24       
+26       0     0 MASQUERADE  all  --  *      !br-5dc4e7cd95f6  172.22.0.0/24        0.0.0.0/0           
+27       0     0 MASQUERADE  all  --  *      !br-b663449b9dad  172.22.0.0/24        0.0.0.0/0           
+28       0     0 ACCEPT     all  --  *      br-9c124b01b788  10.46.0.0/16         172.22.0.0/24       
+29       0     0 MASQUERADE  all  --  *      !br-32eb4d161d19  172.22.0.0/24        0.0.0.0/0           
+30       0     0 MASQUERADE  all  --  *      !br-451b42f23a7c  172.22.0.0/24        0.0.0.0/0           
+31       0     0 MASQUERADE  all  --  *      !br-8e4953efddfe  172.22.0.0/24        0.0.0.0/0           
+32       0     0 MASQUERADE  all  --  *      !br-d20d63d266e1  172.22.0.0/24        0.0.0.0/0           
+33     130 46792 MASQUERADE  all  --  *      !ogstun  10.45.0.0/16         0.0.0.0/0           
+34       0     0 MASQUERADE  all  --  *      wlp4s0  10.45.0.0/16         0.0.0.0/0           
+35       0     0 MASQUERADE  all  --  *      wlp4s0  10.45.0.0/16         0.0.0.0/0           
+36       0     0 MASQUERADE  all  --  *      enx00e04c0266c9  10.45.0.0/16         0.0.0.0/0           
+37       0     0 MASQUERADE  all  --  *      !ogstun  10.45.0.0/16        !172.22.0.21         
+38       0     0 MASQUERADE  all  --  *      !ogstun  10.45.0.0/16        !172.22.0.21         
+39       0     0 MASQUERADE  all  --  *      !ogstun  10.45.0.0/16        !172.22.0.21         
+40       0     0 MASQUERADE  all  --  *      !ogstun  10.45.0.0/16        !172.22.0.21         
+41       0     0 MASQUERADE  all  --  *      !ogstun  10.45.0.0/16        !172.22.0.21         
+42       0     0 MASQUERADE  all  --  *      !ogstun  10.45.0.0/16        !172.22.0.21         
+43       0     0 MASQUERADE  all  --  *      !ogstun  10.45.0.0/16        !172.22.0.21         
+44       0     0 MASQUERADE  all  --  *      !ogstun  10.45.0.0/16        !172.22.0.21         
+45       0     0 MASQUERADE  all  --  *      !ogstun  10.45.0.0/16        !172.22.0.21         
+46      19  7435 MASQUERADE  all  --  *      !ogstun2  10.46.0.0/16         0.0.0.0/0           
+47       0     0 ACCEPT     all  --  *      *       10.46.0.0/16         192.168.50.0/24     
+48       0     0 MASQUERADE  all  --  *      !ogstun  10.45.0.0/16         0.0.0.0/0           
+49       0     0 MASQUERADE  all  --  *      !ogstun2  10.46.0.0/16         0.0.0.0/0           
+50       0     0 MASQUERADE  all  --  *      !ogstun  10.45.0.0/16         0.0.0.0/0           
+51       0     0 MASQUERADE  all  --  *      !ogstun2  10.46.0.0/16         0.0.0.0/0           
+52       0     0 MASQUERADE  all  --  *      !ogstun  10.45.0.0/16         0.0.0.0/0           
+53       0     0 MASQUERADE  all  --  *      !ogstun2  10.46.0.0/16         0.0.0.0/0           
+54       0     0 MASQUERADE  all  --  *      !ogstun  10.45.0.0/16         0.0.0.0/0           
+55       0     0 MASQUERADE  all  --  *      !ogstun2  10.46.0.0/16         0.0.0.0/0           
+56       0     0 MASQUERADE  all  --  *      !ogstun  10.45.0.0/16         0.0.0.0/0           
+57       0     0 MASQUERADE  all  --  *      !ogstun2  10.46.0.0/16         0.0.0.0/0           
+58       0     0 MASQUERADE  all  --  *      !ogstun  10.45.0.0/16         0.0.0.0/0           
+59       0     0 MASQUERADE  all  --  *      !ogstun2  10.46.0.0/16         0.0.0.0/0           
+
+Chain DOCKER (2 references)
+num   pkts bytes target     prot opt in     out     source               destination         
+1        0     0 DNAT       tcp  --  !br-ims *       0.0.0.0/0            0.0.0.0/0            tcp dpt:7090 to:172.22.0.33:7090
+2        0     0 DNAT       udp  --  !br-ims *       0.0.0.0/0            0.0.0.0/0            udp dpt:7090 to:172.22.0.33:7090
+3        0     0 DNAT       tcp  --  !br-ims *       0.0.0.0/0            0.0.0.0/0            tcp dpt:3875 to:172.22.0.18:3875
+4        0     0 DNAT       sctp --  !br-ims *       0.0.0.0/0            0.0.0.0/0            sctp dpt:3875 to:172.22.0.18:3875
+5        0     0 DNAT       tcp  --  !br-ims *       0.0.0.0/0            0.0.0.0/0            tcp dpt:8080 to:172.22.0.18:8080
+6        0     0 DNAT       tcp  --  !br-ims *       0.0.0.0/0            0.0.0.0/0            tcp dpt:3870 to:172.22.0.20:3870
+7        0     0 DNAT       sctp --  !br-ims *       0.0.0.0/0            0.0.0.0/0            sctp dpt:3870 to:172.22.0.20:3870
+8        0     0 DNAT       tcp  --  !br-ims *       0.0.0.0/0            0.0.0.0/0            tcp dpt:6060 to:172.22.0.20:6060
+9        0     0 DNAT       udp  --  !br-ims *       0.0.0.0/0            0.0.0.0/0            udp dpt:6060 to:172.22.0.20:6060
+10       0     0 DNAT       tcp  --  !br-ims *       0.0.0.0/0            0.0.0.0/0            tcp dpt:3869 to:172.22.0.19:3869
+11       0     0 DNAT       sctp --  !br-ims *       0.0.0.0/0            0.0.0.0/0            sctp dpt:3869 to:172.22.0.19:3869
+12       0     0 DNAT       tcp  --  !br-ims *       0.0.0.0/0            0.0.0.0/0            tcp dpt:4060 to:172.22.0.19:4060
+13       0     0 DNAT       udp  --  !br-ims *       0.0.0.0/0            0.0.0.0/0            udp dpt:4060 to:172.22.0.19:4060
+
+=== Mangle Table ===
+Chain PREROUTING (policy ACCEPT 85709 packets, 133M bytes)
+num   pkts bytes target     prot opt in     out     source               destination         
+
+Chain INPUT (policy ACCEPT 81986 packets, 132M bytes)
+num   pkts bytes target     prot opt in     out     source               destination         
+
+Chain FORWARD (policy ACCEPT 3711 packets, 1654K bytes)
+num   pkts bytes target     prot opt in     out     source               destination         
+
+Chain OUTPUT (policy ACCEPT 78305 packets, 25M bytes)
+num   pkts bytes target     prot opt in     out     source               destination         
+1        0     0 MARK       udp  --  *      *       0.0.0.0/0            172.22.0.7           udp dpt:8805 /* Mark PFCP packets for policy routing */ MARK set 0x1
+
+Chain POSTROUTING (policy ACCEPT 82251 packets, 27M bytes)
+num   pkts bytes target     prot opt in     out     source               destination         
