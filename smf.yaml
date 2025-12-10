@@ -612,7 +612,7 @@ global:
 smf:
   sbi:
     server: 
-      - address: 192.168.50.4 
+      - address: 127.0.0.4
         port: 7777
     client:
       nrf:
@@ -649,14 +649,12 @@ smf:
   p-cscf:
     - 10.46.0.1
   mtu: 1400
-  info:
-    - s_nssai:
-        - sst: 1
-          dnn:
-            - internet
-            - ims
-        #ctf:
-        #enabled: auto
+#  info:
+#    - s_nssai:
+#        - sst: 1
+#          dnn:
+#            - internet
+#            - ims
   freeDiameter: /etc/freeDiameter/smf.conf
 #
 #  <SBI Client>>
