@@ -434,7 +434,8 @@ class IMSIManager:
             print("📊 Open5GS MongoDB:")
             mongo_cmd = f"db.{self.mongo_collection}.findOne({{imsi: '{imsi}'}})"
             result = self.run_mongo_command(mongo_cmd)
-            if result and result.strip() and 'null' not in result.lower():
+            # Check if result is actually null or empty
+            if result and result.strip() and result.strip() != 'null':
                 print(result)
             else:
                 print("   ❌ Not found")

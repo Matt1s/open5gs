@@ -1,0 +1,156 @@
+core5g@5gcore-NUC8i5BEK:/etc/open5gs$ python3 manage_imsi.py query --imsi 262010000071627
+
+============================================================
+Querying IMSI: 262010000071627
+============================================================
+
+📊 Open5GS MongoDB:
+
+Error: Could not open history file.
+{
+  _id: ObjectId("69457325c14047d63db5eed2"),
+  imsi: '262010000071627',
+  msisdn: [ '1234567890' ],
+  security: {
+    k: '4A8EF5F361EE8359BEF1CB1F27A1F0C1',
+    amf: '8000',
+    op: null,
+    opc: '7433B4B73FD7C612E42EDEF1FA71F7FA',
+    sqn: Long("40000")
+  },
+  ambr: { downlink: { value: 1, unit: 3 }, uplink: { value: 1, unit: 3 } },
+  schema_version: 1,
+  access_restriction_data: 32,
+  subscriber_status: 0,
+  network_access_mode: 0,
+  subscribed_rau_tau_timer: 12,
+  slice: [
+    {
+      _id: ObjectId("6532e2849472b5658ce22b3a"),
+      sst: 1,
+      default_indicator: true,
+      session: [
+        {
+          _id: ObjectId("6532e2849472b5658ce22b3b"),
+          name: 'internet',
+          type: 1,
+          qos: {
+            index: 9,
+            arp: {
+              priority_level: 8,
+              pre_emption_capability: 1,
+              pre_emption_vulnerability: 1
+            }
+          },
+          ambr: {
+            downlink: { value: 1, unit: 3 },
+            uplink: { value: 1, unit: 3 }
+          },
+          pcc_rule: []
+        },
+        {
+          _id: ObjectId("6532e2849472b5658ce22b3c"),
+          name: 'ims',
+          type: 1,
+          qos: {
+            index: 5,
+            arp: {
+              priority_level: 1,
+              pre_emption_capability: 1,
+              pre_emption_vulnerability: 1
+            }
+          },
+          ambr: {
+            downlink: { value: 3850, unit: 1 },
+            uplink: { value: 1530, unit: 1 }
+          },
+          pcc_rule: [
+            {
+              _id: ObjectId("69457324badb3dbdfe4f6b5c"),
+              qos: [Object],
+              flow: []
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  mme_host: [],
+  mme_realm: [],
+  purge_flag: [],
+  __v: 0
+}
+
+
+📊 IMS HSS AUC table:
+*************************** 1. row ***************************
+       auc_id: 6
+           ki: 4A8EF5F361EE8359BEF1CB1F27A1F0C1
+          opc: 7433B4B73FD7C612E42EDEF1FA71F7FA
+          amf: 8000
+          sqn: 40000
+        iccid: NULL
+         imsi: 262010000071627
+   batch_name: NULL
+   sim_vendor: NULL
+         esim: NULL
+          lpa: NULL
+         pin1: NULL
+         pin2: NULL
+         puk1: NULL
+         puk2: NULL
+          kid: NULL
+          psk: NULL
+          des: NULL
+         adm1: NULL
+        misc1: NULL
+        misc2: NULL
+        misc3: NULL
+        misc4: NULL
+last_modified: 2025-12-19T15:45:41Z
+
+
+📊 IMS HSS subscriber table:
+*************************** 1. row ***************************
+           subscriber_id: 6
+                    imsi: 262010000071627
+                 enabled: 1
+                  auc_id: 6
+             default_apn: 1
+                apn_list: 1
+                  msisdn: 1234567890
+              ue_ambr_dl: 256000
+              ue_ambr_ul: 256000
+                     nam: 0
+         roaming_enabled: 1
+       roaming_rule_list: NULL
+subscribed_rau_tau_timer: NULL
+             serving_mme: NULL
+   serving_mme_timestamp: NULL
+       serving_mme_realm: NULL
+        serving_mme_peer: NULL
+           last_modified: NULL
+
+
+📊 IMS HSS ims_subscriber table:
+*************************** 1. row ***************************
+   ims_subscriber_id: 6
+              msisdn: 1234567890
+         msisdn_list: NULL
+                imsi: 262010000071627
+            ifc_path: default_ifc.xml
+               pcscf: NULL
+         pcscf_realm: ims.mnc001.mcc262.3gppnetwork.org
+pcscf_active_session: NULL
+     pcscf_timestamp: NULL
+          pcscf_peer: NULL
+        xcap_profile: NULL
+          sh_profile: NULL
+               scscf: sip:scscf.ims.mnc001.mcc262.3gppnetwork.org:6060
+     scscf_timestamp: NULL
+         scscf_realm: ims.mnc001.mcc262.3gppnetwork.org
+          scscf_peer: NULL
+    sh_template_path: NULL
+       last_modified: NULL
+
+
