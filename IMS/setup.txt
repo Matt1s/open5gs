@@ -1,0 +1,15 @@
+cd /etc/open5gs/IMS
+./setup_5gcore_hotspot.sh
+sudo ./setup_ogstun2.sh
+
+docker-compose -f ims-standalone-deploy.yaml up -d
+// If previous command failed, used next 2 commands:
+docker-compose -f ims-standalone-deploy.yaml down -d
+docker-compose -f ims-standalone-deploy.yaml up -d
+
+// This may be also needed
+sudo systemctl restart open5gs-*.service
+
+// CHECK: after writing "ip a" now, there should IPs on "eno1" interface 
+// from 192.168.50.2-.30 and also .101 and .200
+// ogstun and ogstun2 should UP
