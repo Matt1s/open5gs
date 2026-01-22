@@ -472,13 +472,58 @@ class IMSIManager:
         except Exception as e:
             print(f"\n❌ Error querying IMSI: {str(e)}\n")
 
+def prompt_for_value(prompt_text, validator_func=None, error_msg=None):
+    """Prompt user for a value with optional validation"""
+    while True:
+        value = input(prompt_text).strip()
+        if not value:
+            print("❌ Value cannot be empty. Please try again.")
+            continue
+        
+        if validator_func:
+            is_valid, msg = validator_func(value)
+            if not is_valid:
+                print(f"❌ {msg}")
+                continue
+        
+        return value
+
+def validate_imsi(imsi):
+    """Validate IMSI format"""
+    if not imsi.isdigit():
+        return False, "IMSI must contain only digits"
+    if len(imsi) < 14 or len(imsi) > 15:
+        return False, "IMSI must be 14-15 digits"
+    return True, None
+
+def validate_msisdn(msisdn):
+    """Validate MSISDN format"""
+    if not msisdn.isdigit():
+        return False, "MSISDN must contain only digits"
+    if len(msisdn) < 5 or len(msisdn) > 15:
+        return False, "MSISDN must be 5-15 digits"
+    return True, None
+
+def validate_hex_key(key):
+    """Validate hex key format (32 characters)"""
+    if len(key) != 32:
+        return False, "Key must be exactly 32 hex characters"
+    try:
+        int(key, 16)
+        return True, None
+    except ValueError:
+        return False, "Key must be valid hexadecimal string"
+
 def main():
     parser = argparse.ArgumentParser(
         description='Manage IMSIs in Open5GS WebUI and IMS HSS databases',
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:
-  # Add a new IMSI
+  # Add a new IMSI (interactive mode)
+  %(prog)s add
+
+  # Add a new IMSI (command-line mode)
   %(prog)s add --imsi 262010000071631 --msisdn 1234567892 \\
       --ki 4A8EF5F361EE8359BEF1CB1F27A1F0C2 \\
       --opc 7433B4B73FD7C612E42EDEF1FA71F7FB
@@ -500,10 +545,10 @@ Note: Script uses settings from reference IMSIs:
     
     # Add command
     add_parser = subparsers.add_parser('add', help='Add a new IMSI')
-    add_parser.add_argument('--imsi', required=True, help='IMSI (e.g., 262010000071631)')
-    add_parser.add_argument('--msisdn', required=True, help='MSISDN/Phone number (e.g., 1234567892)')
-    add_parser.add_argument('--ki', required=True, help='Ki key (32 hex characters)')
-    add_parser.add_argument('--opc', required=True, help='OPC key (32 hex characters)')
+    add_parser.add_argument('--imsi', help='IMSI (e.g., 262010000071631)')
+    add_parser.add_argument('--msisdn', help='MSISDN/Phone number (e.g., 1234567892)')
+    add_parser.add_argument('--ki', help='Ki key (32 hex characters)')
+    add_parser.add_argument('--opc', help='OPC key (32 hex characters)')
     
     # Delete command
     delete_parser = subparsers.add_parser('delete', help='Delete an IMSI')
@@ -519,8 +564,38 @@ Note: Script uses settings from reference IMSIs:
         parser.print_help()
         sys.exit(1)
     
-    # Validate inputs
-    if args.command in ['add', 'delete', 'query']:
+    # Interactive mode for 'add' command if no arguments provided
+    if args.command == 'add':
+        if not all([args.imsi, args.msisdn, args.ki, args.opc]):
+            print("\n" + "="*60)
+            print("         IMSI Addition - Interactive Mode")
+            print("="*60 + "\n")
+            
+            # Prompt for each field
+            if not args.imsi:
+                print("📝 Step 1/4: Enter IMSI")
+                print("   Example: 262010000071631 (14-15 digits)")
+                args.imsi = prompt_for_value("   IMSI: ", validate_imsi)
+            
+            if not args.msisdn:
+                print("\n📝 Step 2/4: Enter MSISDN (phone number)")
+                print("   Example: 1234567892")
+                args.msisdn = prompt_for_value("   MSISDN: ", validate_msisdn)
+            
+            if not args.ki:
+                print("\n📝 Step 3/4: Enter Ki (authentication key)")
+                print("   Example: 4A8EF5F361EE8359BEF1CB1F27A1F0C2 (32 hex characters)")
+                args.ki = prompt_for_value("   Ki: ", validate_hex_key)
+            
+            if not args.opc:
+                print("\n📝 Step 4/4: Enter OPC (operator key)")
+                print("   Example: 7433B4B73FD7C612E42EDEF1FA71F7FB (32 hex characters)")
+                args.opc = prompt_for_value("   OPC: ", validate_hex_key)
+            
+            print()  # Extra newline for spacing
+    
+    # Validate inputs for delete and query commands
+    if args.command in ['delete', 'query']:
         if len(args.imsi) < 14 or len(args.imsi) > 15:
             print("❌ Error: IMSI must be 14-15 digits")
             sys.exit(1)
@@ -528,18 +603,26 @@ Note: Script uses settings from reference IMSIs:
             print("❌ Error: IMSI must contain only digits")
             sys.exit(1)
     
+    # Final validation for 'add' command (handles both interactive and command-line mode)
     if args.command == 'add':
-        if len(args.ki) != 32:
-            print("❌ Error: Ki must be exactly 32 hex characters")
+        is_valid, msg = validate_imsi(args.imsi)
+        if not is_valid:
+            print(f"❌ Error: {msg}")
             sys.exit(1)
-        if len(args.opc) != 32:
-            print("❌ Error: OPC must be exactly 32 hex characters")
+        
+        is_valid, msg = validate_msisdn(args.msisdn)
+        if not is_valid:
+            print(f"❌ Error: {msg}")
             sys.exit(1)
-        try:
-            int(args.ki, 16)
-            int(args.opc, 16)
-        except ValueError:
-            print("❌ Error: Ki and OPC must be valid hexadecimal strings")
+        
+        is_valid, msg = validate_hex_key(args.ki)
+        if not is_valid:
+            print(f"❌ Error: Ki - {msg}")
+            sys.exit(1)
+        
+        is_valid, msg = validate_hex_key(args.opc)
+        if not is_valid:
+            print(f"❌ Error: OPC - {msg}")
             sys.exit(1)
     
     # Execute command
