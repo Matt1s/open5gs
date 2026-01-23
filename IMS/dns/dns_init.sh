@@ -36,6 +36,12 @@ cp /mnt/dns/named.conf /etc/bind
 [ ${#MNC} == 3 ] && IMS_DOMAIN="ims.mnc${MNC}.mcc${MCC}.3gppnetwork.org" || IMS_DOMAIN="ims.mnc0${MNC}.mcc${MCC}.3gppnetwork.org"
 [ ${#MNC} == 3 ] && PUB_3GPP_DOMAIN="mnc${MNC}.mcc${MCC}.pub.3gppnetwork.org" || PUB_3GPP_DOMAIN="mnc0${MNC}.mcc${MCC}.pub.3gppnetwork.org"
 
+# Secondary PLMN support
+if [ ! -z "$MCC2" ] && [ ! -z "$MNC2" ]; then
+  [ ${#MNC2} == 3 ] && IMS_DOMAIN2="ims.mnc${MNC2}.mcc${MCC2}.3gppnetwork.org" || IMS_DOMAIN2="ims.mnc0${MNC2}.mcc${MCC2}.3gppnetwork.org"
+  [ ${#MNC2} == 3 ] && PUB_3GPP_DOMAIN2="mnc${MNC2}.mcc${MCC2}.pub.3gppnetwork.org" || PUB_3GPP_DOMAIN2="mnc0${MNC2}.mcc${MCC2}.3gppnetwork.org"
+fi
+
 sed -i 's|EPC_DOMAIN|'$EPC_DOMAIN'|g' /etc/bind/epc_zone
 sed -i 's|DNS_IP|'$DNS_IP'|g' /etc/bind/epc_zone
 sed -i 's|OSMOEPDG_IP|'$OSMOEPDG_IP'|g' /etc/bind/epc_zone
@@ -61,6 +67,27 @@ sed -i 's|DNS_IP|'$DNS_IP'|g' /etc/bind/e164.arpa
 sed -i 's|EPC_DOMAIN|'$EPC_DOMAIN'|g' /etc/bind/named.conf
 sed -i 's|IMS_DOMAIN|'$IMS_DOMAIN'|g' /etc/bind/named.conf
 sed -i 's|PUB_3GPP_DOMAIN|'$PUB_3GPP_DOMAIN'|g' /etc/bind/named.conf
+
+# Secondary PLMN zone files
+if [ ! -z "$IMS_DOMAIN2" ]; then
+  cp /etc/bind/ims_zone /etc/bind/ims_zone2
+  sed -i 's|'$IMS_DOMAIN'|'$IMS_DOMAIN2'|g' /etc/bind/ims_zone2
+  
+  cp /etc/bind/pub_3gpp_zone /etc/bind/pub_3gpp_zone2
+  sed -i 's|'$PUB_3GPP_DOMAIN'|'$PUB_3GPP_DOMAIN2'|g' /etc/bind/pub_3gpp_zone2
+  
+  # Add secondary zones to named.conf
+  echo "" >> /etc/bind/named.conf
+  echo "zone \"${IMS_DOMAIN2}\" IN {" >> /etc/bind/named.conf
+  echo "    type master;" >> /etc/bind/named.conf
+  echo "    file \"/etc/bind/ims_zone2\";" >> /etc/bind/named.conf
+  echo "};" >> /etc/bind/named.conf
+  echo "" >> /etc/bind/named.conf
+  echo "zone \"${PUB_3GPP_DOMAIN2}\" IN {" >> /etc/bind/named.conf
+  echo "    type master;" >> /etc/bind/named.conf
+  echo "    file \"/etc/bind/pub_3gpp_zone2\";" >> /etc/bind/named.conf
+  echo "};" >> /etc/bind/named.conf
+fi
 
 exec /usr/sbin/named -c /etc/bind/named.conf -g -u bind $@
 
