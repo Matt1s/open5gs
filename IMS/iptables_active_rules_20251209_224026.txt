@@ -1,0 +1,57 @@
+# iptables ACTIVE rules backup (pkts > 0 or bytes > 0) - Ut  9. december 2025, 22:40:26 CET
+# These rules have actually processed traffic
+
+=== FILTER Table - INPUT Chain ===
+Chain INPUT (policy ACCEPT 77968 packets, 130M bytes)
+num   pkts bytes target     prot opt in     out     source               destination         
+1    16146 6827K rtpengine  udp  --  *      *       0.0.0.0/0            0.0.0.0/0           
+2     5814 1940K ACCEPT     all  --  wlp4s0 *       0.0.0.0/0            0.0.0.0/0           
+10     155 10330 ACCEPT     all  --  ogstun *       0.0.0.0/0            0.0.0.0/0           
+
+=== FILTER Table - FORWARD Chain ===
+Chain FORWARD (policy DROP 0 packets, 0 bytes)
+num   pkts bytes target     prot opt in     out     source               destination         
+1     3712 1654K DOCKER-USER  all  --  *      *       0.0.0.0/0            0.0.0.0/0           
+2     3712 1654K DOCKER-FORWARD  all  --  *      *       0.0.0.0/0            0.0.0.0/0           
+4     1688  636K ACCEPT     all  --  ogstun *       0.0.0.0/0            0.0.0.0/0           
+5       63  4750 ACCEPT     all  --  wlp4s0 enx00e04c0266c9  0.0.0.0/0            0.0.0.0/0           
+6       55  9221 ACCEPT     all  --  enx00e04c0266c9 wlp4s0  0.0.0.0/0            0.0.0.0/0            state RELATED,ESTABLISHED
+48    1906 1005K ACCEPT     all  --  enx00e04c0266c9 ogstun  0.0.0.0/0            0.0.0.0/0            state RELATED,ESTABLISHED
+
+=== FILTER Table - OUTPUT Chain ===
+Chain OUTPUT (policy ACCEPT 73438 packets, 24M bytes)
+num   pkts bytes target     prot opt in     out     source               destination         
+1     6741 2094K ACCEPT     all  --  *      wlp4s0  0.0.0.0/0            0.0.0.0/0           
+
+=== FILTER Table - DOCKER-USER Chain ===
+Chain DOCKER-USER (1 references)
+num   pkts bytes target     prot opt in     out     source               destination         
+29    3712 1654K RETURN     all  --  *      *       0.0.0.0/0            0.0.0.0/0           
+
+=== FILTER Table - DOCKER-FORWARD Chain ===
+Chain DOCKER-FORWARD (1 references)
+num   pkts bytes target     prot opt in     out     source               destination         
+1     3712 1654K DOCKER-CT  all  --  *      *       0.0.0.0/0            0.0.0.0/0           
+2     3712 1654K DOCKER-INTERNAL  all  --  *      *       0.0.0.0/0            0.0.0.0/0           
+3     3712 1654K DOCKER-BRIDGE  all  --  *      *       0.0.0.0/0            0.0.0.0/0           
+
+=== NAT Table - PREROUTING Chain ===
+Chain PREROUTING (policy ACCEPT 785 packets, 150K bytes)
+num   pkts bytes target     prot opt in     out     source               destination         
+2      286 42772 DOCKER     all  --  *      *       0.0.0.0/0            0.0.0.0/0            ADDRTYPE match dst-type LOCAL
+
+=== NAT Table - POSTROUTING Chain ===
+Chain POSTROUTING (policy ACCEPT 5785 packets, 505K bytes)
+num   pkts bytes target     prot opt in     out     source               destination         
+5       13  1193 MASQUERADE  all  --  *      !br-b3e662ee1e47  172.22.0.0/24        0.0.0.0/0           
+33     130 46792 MASQUERADE  all  --  *      !ogstun  10.45.0.0/16         0.0.0.0/0           
+46      19  7435 MASQUERADE  all  --  *      !ogstun2  10.46.0.0/16         0.0.0.0/0           
+
+=== NAT Table - OUTPUT Chain ===
+Chain OUTPUT (policy ACCEPT 5826 packets, 515K bytes)
+num   pkts bytes target     prot opt in     out     source               destination         
+1      771 80628 DOCKER     all  --  *      *       0.0.0.0/0           !127.0.0.0/8          ADDRTYPE match dst-type LOCAL
+
+=== Mangle Table - OUTPUT Chain ===
+Chain OUTPUT (policy ACCEPT 80181 packets, 26M bytes)
+num   pkts bytes target     prot opt in     out     source               destination         

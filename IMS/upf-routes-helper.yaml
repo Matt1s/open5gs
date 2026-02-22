@@ -1,0 +1,41 @@
+version: '3'
+services:
+  upf-routes:
+    image: nicolaka/netshoot
+    network_mode: host
+    privileged: true
+    container_name: upf-routes
+    env_file:
+      - .env
+    command:
+      - /bin/sh
+      - -c
+      - |
+        # Add route for UE subnet via UPF
+        ip ro add 10.45.0.0/16 via 172.22.0.8 dev br-e9bcf3671113 2>/dev/null || echo "Route exists"
+        
+        # NAT UE traffic going to internet
+        iptables -t nat -I POSTROUTING 1 -s 10.45.0.0/16 -o enx00e04c0266c9 -j MASQUERADE 2>/dev/null || echo "NAT rule exists"
+        
+        # CRITICAL: SNAT GTP return traffic from UPF to appear from hotspot IP
+        iptables -t nat -I POSTROUTING 1 -s 172.22.0.8 -d 192.168.56.0/24 -p udp --dport 2152 -j SNAT --to-source 192.168.56.1 2>/dev/null || echo "SNAT rule exists"
+        
+        # Forward rules
+        iptables -I FORWARD 1 -s 10.45.0.0/16 -o enx00e04c0266c9 -j ACCEPT 2>/dev/null || echo "Forward rule 1 exists"
+        iptables -I FORWARD 2 -d 10.45.0.0/16 -i enx00e04c0266c9 -m state --state RELATED,ESTABLISHED -j ACCEPT 2>/dev/null || echo "Forward rule 2 exists"
+        iptables -I FORWARD 1 -s 172.22.0.0/24 -d 192.168.56.0/24 -j ACCEPT 2>/dev/null || echo "Forward rule 3 exists"
+        iptables -I FORWARD 2 -s 192.168.56.0/24 -d 172.22.0.0/24 -j ACCEPT 2>/dev/null || echo "Forward rule 4 exists"
+        
+        # Enable IP forwarding
+        sysctl -w net.ipv4.ip_forward=1
+        sysctl -w net.ipv4.conf.all.accept_local=1
+        
+        echo "=== UPF Routing Setup Complete ==="
+        echo "Routes:"
+        ip ro | grep "10.45\|192.168.56"
+        echo ""
+        echo "NAT Rules:"
+        iptables -t nat -L POSTROUTING -n -v | grep -E "10.45|192.168.56.1" | head -5
+        echo ""
+        echo "Keeping container alive..."
+        tail -f /dev/null

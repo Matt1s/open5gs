@@ -14,8 +14,10 @@ sepp:
       server:
         private_key: /etc/open5gs/tls/sepp2.key
         cert: /etc/open5gs/tls/sepp2.crt
+#        sslkeylogfile: /var/log/open5gs/tls/sepp2-server-sslkeylog.log
       client:
         cacert: /etc/open5gs/tls/ca.crt
+#        sslkeylogfile: /var/log/open5gs/tls/sepp2-client-sslkeylog.log
   sbi:
     server:
       - address: 127.0.2.250
@@ -24,7 +26,7 @@ sepp:
 #      nrf:
 #        - uri: http://127.0.0.10:7777
       scp:
-        - uri: http://127.0.0.200:7777
+        - uri: http://192.168.50.200:7777
   n32:
     server:
       - sender: sepp2.localdomain
@@ -66,7 +68,7 @@ sepp:
 #        port: 7777
 #    client:
 #      scp:
-#        - uri: http://127.0.0.200:7777
+#        - uri: http://192.168.50.200:7777
 #  n32:
 #    server:
 #      - sender: sepp2.localdomain
@@ -83,7 +85,7 @@ sepp:
 #        port: 7777
 #    client:
 #      scp:
-#        - uri: http://127.0.0.200:7777
+#        - uri: http://192.168.50.200:7777
 #  n32:
 #    server:
 #      - sender: sepp2.localdomain
@@ -102,7 +104,7 @@ sepp:
 #        port: 7777
 #    client:
 #      scp:
-#        - uri: http://127.0.0.200:7777
+#        - uri: http://192.168.50.200:7777
 #  n32:
 #    server:
 #      - sender: sepp2.localdomain
@@ -136,7 +138,37 @@ sepp:
 #        port: 7777
 #    client:
 #      scp:
-#        - uri: http://127.0.0.200:7777
+#        - uri: http://192.168.50.200:7777
+#  n32:
+#    server:
+#      - sender: sepp2.localdomain
+#        scheme: https
+#        address: 127.0.2.251
+#    client:
+#      sepp:
+#        - receiver: sepp1.localdomain
+#          uri: https://sepp1.localdomain
+#          resolve: 127.0.1.251
+#
+#  o Enable SSL key logging for Wireshark
+#    - This configuration allows capturing SSL/TLS session keys
+#      for debugging or analysis purposes using Wireshark.
+#  default:
+#    tls:
+#      server:
+#        private_key: /etc/open5gs/tls/sepp2.key
+#        cert: /etc/open5gs/tls/sepp2.crt
+#        sslkeylogfile: /var/log/open5gs/tls/sepp2-server-sslkeylog.log
+#      client:
+#        cacert: /etc/open5gs/tls/ca.crt
+#        client_sslkeylogfile: /var/log/open5gs/tls/sepp2-client-sslkeylog.log
+#  sbi:
+#    server:
+#      - address: 127.0.2.250
+#        port: 7777
+#    client:
+#      scp:
+#        - uri: http://192.168.50.200:7777
 #  n32:
 #    server:
 #      - sender: sepp2.localdomain
@@ -166,7 +198,7 @@ sepp:
 #        port: 7777
 #    client:
 #      scp:
-#        - uri: http://127.0.0.200:7777
+#        - uri: http://192.168.50.200:7777
 #  n32:
 #    server:
 #      - sender: sepp2.localdomain
@@ -197,7 +229,7 @@ sepp:
 #        port: 7777
 #    client:
 #      scp:
-#        - uri: http://127.0.0.200:7777
+#        - uri: http://192.168.50.200:7777
 #  n32:
 #    server:
 #      - sender: sepp2.localdomain
@@ -222,7 +254,7 @@ sepp:
 #        port: 7777
 #    client:
 #      scp:
-#        - uri: http://127.0.0.200:7777
+#        - uri: http://192.168.50.200:7777
 #  n32:
 #    server:
 #      - sender: sepp2.localdomain
