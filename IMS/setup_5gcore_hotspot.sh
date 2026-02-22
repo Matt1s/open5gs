@@ -15,14 +15,14 @@ BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
 # Configuration from .env file
-HOTSPOT_INTERFACE="eno1"
+HOTSPOT_INTERFACE="wlp4s0"
 HOTSPOT_SSID="5gcore"
 HOTSPOT_PASSWORD="p1234567"  # Change this as needed
 HOTSPOT_NETWORK="192.168.50.0/24"  # WiFi hotspot network
 HOTSPOT_IP="192.168.50.1"
 DOCKER_5GCORE_NETWORK="172.22.0.0/24"  # Open5GS 5G Core network
 DOCKER_IMS_NETWORK="192.168.50.0/24"   # Kamailio IMS network (changed to avoid conflict)
-INTERNET_INTERFACE="enx00e04c026225"  # Main internet connection
+INTERNET_INTERFACE="enx00e04c0266c9"  # Main internet connection
 GNB_IP_RANGE="192.168.50.150-192.168.50.200"  # IP range for srsRAN devices
 # Function to print status messages
 print_status() {
@@ -65,12 +65,49 @@ fi
 
 
 
-# Step 6: Enable IP forwarding
+
+# -------------------------------------------------------
+# Step 1: Create and activate the WiFi hotspot
+# -------------------------------------------------------
+print_status "Setting up WiFi hotspot on $HOTSPOT_INTERFACE (SSID: $HOTSPOT_SSID)..."
+
+# Delete any existing hotspot connection with the same name to avoid conflicts
+nmcli connection delete "$HOTSPOT_SSID" 2>/dev/null || true
+
+# Create the hotspot
+nmcli connection add \
+    type wifi \
+    ifname "$HOTSPOT_INTERFACE" \
+    con-name "$HOTSPOT_SSID" \
+    autoconnect yes \
+    ssid "$HOTSPOT_SSID" \
+    -- \
+    wifi.mode ap \
+    wifi-sec.key-mgmt wpa-psk \
+    wifi-sec.psk "$HOTSPOT_PASSWORD" \
+    ipv4.method shared \
+    ipv4.addresses "$HOTSPOT_IP/24"
+
+# Bring up the hotspot
+nmcli connection up "$HOTSPOT_SSID"
+
+print_status "✅ Hotspot '$HOTSPOT_SSID' is up on $HOTSPOT_INTERFACE"
+
+# Wait for the interface to fully come up
+sleep 3
+
+
+# -------------------------------------------------------
+# Step 2: Enable IP forwarding
+# -------------------------------------------------------
 print_status "Enabling IP forwarding..."
 echo 'net.ipv4.ip_forward=1' | sudo tee /etc/sysctl.d/99-5gcore-forwarding.conf > /dev/null
 sudo sysctl -p /etc/sysctl.d/99-5gcore-forwarding.conf
 
-# Step 7: Configure iptables rules
+
+# -------------------------------------------------------
+# Step 3: Configure iptables rules
+# -------------------------------------------------------
 print_status "Configuring firewall rules..."
 
 # Clean up any existing rules for our hotspot
@@ -83,14 +120,14 @@ sudo iptables -D FORWARD -i $INTERNET_INTERFACE -o $HOTSPOT_INTERFACE -m state -
 DOCKER_5GCORE_BRIDGE=$(docker network ls --filter name=docker_open5gs_default --format "{{.Name}}" | head -1)
 if [ -n "$DOCKER_5GCORE_BRIDGE" ]; then
     DOCKER_5GCORE_IF=$(ip route | grep "$DOCKER_5GCORE_NETWORK" | awk '{print $3}' | head -1)
-    
+
     if [ -n "$DOCKER_5GCORE_IF" ]; then
         print_status "Found Open5GS Docker bridge: $DOCKER_5GCORE_IF for network $DOCKER_5GCORE_NETWORK"
-        
+       
         # Clean up existing Docker bridge rules
         sudo iptables -D FORWARD -i $HOTSPOT_INTERFACE -o $DOCKER_5GCORE_IF -j ACCEPT 2>/dev/null || true
         sudo iptables -D FORWARD -i $DOCKER_5GCORE_IF -o $HOTSPOT_INTERFACE -j ACCEPT 2>/dev/null || true
-        
+      
         # Add new Docker bridge forwarding rules
         print_status "Adding Open5GS Docker bridge forwarding rules..."
         sudo iptables -I FORWARD 1 -i $HOTSPOT_INTERFACE -o $DOCKER_5GCORE_IF -j ACCEPT
@@ -133,7 +170,9 @@ sudo iptables -I FORWARD 7 -i $HOTSPOT_INTERFACE -o $HOTSPOT_INTERFACE -j ACCEPT
 # Wait a bit for the connection to establish
 sleep 5
 
-# Step 9.1: Add additional IP addresses to WiFi interface
+# -------------------------------------------------------
+# Step 4: Add additional IP addresses to WiFi interface
+# -------------------------------------------------------
 print_status "Adding IP addresses to $HOTSPOT_INTERFACE..."
 
 # Add IP addresses from 192.168.50.2 to 192.168.50.30
@@ -141,9 +180,8 @@ for i in {2..30}; do
     sudo ip addr add 192.168.50.$i/24 dev $HOTSPOT_INTERFACE 2>/dev/null || print_warning "IP 192.168.50.$i already assigned or error occurred"
 done
 
-# Add additional IP 192.168.50.200
+# Add additional IPs
 sudo ip addr add 192.168.50.200/24 dev $HOTSPOT_INTERFACE 2>/dev/null || print_warning "IP 192.168.50.200 already assigned or error occurred"
 sudo ip addr add 192.168.50.101/24 dev $HOTSPOT_INTERFACE 2>/dev/null || print_warning "IP 192.168.50.101 already assigned or error occurred"
 
 print_status "✅ IP addresses assigned to $HOTSPOT_INTERFACE"
-
