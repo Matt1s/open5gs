@@ -22,7 +22,7 @@ HOTSPOT_NETWORK="192.168.50.0/24"  # WiFi hotspot network
 HOTSPOT_IP="192.168.50.1"
 DOCKER_5GCORE_NETWORK="172.22.0.0/24"  # Open5GS 5G Core network
 DOCKER_IMS_NETWORK="192.168.50.0/24"   # Kamailio IMS network (changed to avoid conflict)
-INTERNET_INTERFACE="enx00e04c0266c9"  # Main internet connection
+INTERNET_INTERFACE="wlxccbabd0b217c"  # Main internet connection
 GNB_IP_RANGE="192.168.50.150-192.168.50.200"  # IP range for srsRAN devices
 # Function to print status messages
 print_status() {
@@ -74,6 +74,14 @@ print_status "Setting up WiFi hotspot on $HOTSPOT_INTERFACE (SSID: $HOTSPOT_SSID
 # Delete any existing hotspot connection with the same name to avoid conflicts
 nmcli connection delete "$HOTSPOT_SSID" 2>/dev/null || true
 
+# Build the list of all IPs to assign via NetworkManager so NM owns them
+# and never wipes them on connection refresh.
+EXTRA_ADDRS="$HOTSPOT_IP/24"
+for i in {2..30}; do
+    EXTRA_ADDRS="$EXTRA_ADDRS,192.168.50.$i/24"
+done
+EXTRA_ADDRS="$EXTRA_ADDRS,192.168.50.101/24,192.168.50.200/24"
+
 # Create the hotspot
 nmcli connection add \
     type wifi \
@@ -86,7 +94,7 @@ nmcli connection add \
     wifi-sec.key-mgmt wpa-psk \
     wifi-sec.psk "$HOTSPOT_PASSWORD" \
     ipv4.method shared \
-    ipv4.addresses "$HOTSPOT_IP/24"
+    ipv4.addresses "$EXTRA_ADDRS"
 
 # Bring up the hotspot
 nmcli connection up "$HOTSPOT_SSID"
@@ -160,28 +168,25 @@ fi
 # Add internet access rules
 print_status "Adding internet access rules..."
 sudo iptables -t nat -I POSTROUTING 1 -s $HOTSPOT_NETWORK -o $INTERNET_INTERFACE -j MASQUERADE
+# MASQUERADE for UE subnet (ogstun) going to internet - needed for UE internet access
+sudo iptables -t nat -I POSTROUTING 2 -s 10.45.0.0/16 -o $INTERNET_INTERFACE -j MASQUERADE
+sudo iptables -t nat -I POSTROUTING 3 -s 10.46.0.0/16 -o $INTERNET_INTERFACE -j MASQUERADE
 sudo iptables -I FORWARD 5 -i $HOTSPOT_INTERFACE -o $INTERNET_INTERFACE -j ACCEPT
 sudo iptables -I FORWARD 6 -i $INTERNET_INTERFACE -o $HOTSPOT_INTERFACE -m state --state RELATED,ESTABLISHED -j ACCEPT
 
 # Add rule for local hotspot traffic (important for 5G Core connectivity)
 sudo iptables -I FORWARD 7 -i $HOTSPOT_INTERFACE -o $HOTSPOT_INTERFACE -j ACCEPT
 
+# Critical: allow UE traffic (ogstun/ogstun2) through DOCKER-USER chain to/from internet.
+# Without these, Docker's DOCKER-USER RETURN rule sends traffic to DOCKER-FORWARD which DROPs it.
+print_status "Adding DOCKER-USER rules for UE internet access..."
+sudo iptables -I DOCKER-USER 1 -i $INTERNET_INTERFACE -o ogstun  -m state --state RELATED,ESTABLISHED -j ACCEPT
+sudo iptables -I DOCKER-USER 2 -i $INTERNET_INTERFACE -o ogstun2 -m state --state RELATED,ESTABLISHED -j ACCEPT
+sudo iptables -I DOCKER-USER 3 -i ogstun  -o $INTERNET_INTERFACE -j ACCEPT
+sudo iptables -I DOCKER-USER 4 -i ogstun2 -o $INTERNET_INTERFACE -j ACCEPT
+
 
 # Wait a bit for the connection to establish
 sleep 5
 
-# -------------------------------------------------------
-# Step 4: Add additional IP addresses to WiFi interface
-# -------------------------------------------------------
-print_status "Adding IP addresses to $HOTSPOT_INTERFACE..."
-
-# Add IP addresses from 192.168.50.2 to 192.168.50.30
-for i in {2..30}; do
-    sudo ip addr add 192.168.50.$i/24 dev $HOTSPOT_INTERFACE 2>/dev/null || print_warning "IP 192.168.50.$i already assigned or error occurred"
-done
-
-# Add additional IPs
-sudo ip addr add 192.168.50.200/24 dev $HOTSPOT_INTERFACE 2>/dev/null || print_warning "IP 192.168.50.200 already assigned or error occurred"
-sudo ip addr add 192.168.50.101/24 dev $HOTSPOT_INTERFACE 2>/dev/null || print_warning "IP 192.168.50.101 already assigned or error occurred"
-
-print_status "✅ IP addresses assigned to $HOTSPOT_INTERFACE"
+print_status "✅ All IP addresses (192.168.50.1-30, .101, .200) are managed by NetworkManager and will persist."
