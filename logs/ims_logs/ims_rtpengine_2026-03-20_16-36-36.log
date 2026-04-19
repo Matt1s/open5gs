@@ -1,0 +1,85 @@
+2026-03-20T09:31:38.173911282Z + RUNTIME=rtpengine
+2026-03-20T09:31:38.174981414Z + lsmod
+2026-03-20T09:31:38.174994611Z + grep xt_RTPENGINE
+2026-03-20T09:31:38.204314690Z + modprobe xt_RTPENGINE
+2026-03-20T09:31:38.211750578Z modprobe: FATAL: Module xt_RTPENGINE not found in directory /lib/modules/6.8.0-106-generic
+2026-03-20T09:31:38.211771297Z + modprobe xt_RTPENGINE
+2026-03-20T09:31:38.214034768Z modprobe: FATAL: Module xt_RTPENGINE not found in directory /lib/modules/6.8.0-106-generic
+2026-03-20T09:31:38.220498494Z + '[' -z 192.168.50.16 ']'
+2026-03-20T09:31:38.220517425Z + '[' -z 0 ']'
+2026-03-20T09:31:38.220521728Z + '[' -z 192.168.50.16:2223 ']'
+2026-03-20T09:31:38.220524836Z + '[' -z 49000 ']'
+2026-03-20T09:31:38.220527789Z + '[' -z 50000 ']'
+2026-03-20T09:31:38.220530685Z + '[' -z 184 ']'
+2026-03-20T09:31:38.220533595Z + '[' -z /run/ngcp-rtpengine-daemon.pid ']'
+2026-03-20T09:31:38.220536536Z + LISTEN_CLI=192.168.50.16:9901
+2026-03-20T09:31:38.220539469Z + IMS_INTERFACE=10.46.0.1
+2026-03-20T09:31:38.220542368Z + OPTIONS=
+2026-03-20T09:31:38.220545349Z + OPTIONS=' --interface=external/192.168.50.16 --interface=internal/10.46.0.1'
+2026-03-20T09:31:38.220548566Z + OPTIONS=' --interface=external/192.168.50.16 --interface=internal/10.46.0.1 --listen-ng=192.168.50.16:2223 --listen-cli=192.168.50.16:9901 --pidfile=/run/ngcp-rtpengine-daemon.pid --port-min=49000 --port-max=50000 '
+2026-03-20T09:31:38.220551892Z + OPTIONS=' --interface=external/192.168.50.16 --interface=internal/10.46.0.1 --listen-ng=192.168.50.16:2223 --listen-cli=192.168.50.16:9901 --pidfile=/run/ngcp-rtpengine-daemon.pid --port-min=49000 --port-max=50000  --table=0  --tos=184 --foreground'
+2026-03-20T09:31:38.220555671Z + test no = yes
+2026-03-20T09:31:38.220558599Z + set +e
+2026-03-20T09:31:38.220561537Z + ip r add 10.46.0.0/16 via 192.168.50.7
+2026-03-20T09:31:38.236600496Z + ip r add 10.45.0.0/16 via 192.168.50.7
+2026-03-20T09:31:38.243268486Z RTNETLINK answers: File exists
+2026-03-20T09:31:38.243442822Z + set -x
+2026-03-20T09:31:38.243550654Z + exec rtpengine --interface=external/192.168.50.16 --interface=internal/10.46.0.1 --listen-ng=192.168.50.16:2223 --listen-cli=192.168.50.16:9901 --pidfile=/run/ngcp-rtpengine-daemon.pid --port-min=49000 --port-max=50000 --table=0 --tos=184 --foreground
+2026-03-20T09:31:38.567259477Z [1773999098.567160] ERR: [core] FAILED TO CREATE NFTABLES CHAINS OR RULES, KERNEL FORWARDING POSSIBLY WON'T WORK: error returned from netlink for add rule (No such file or directory)
+2026-03-20T09:31:38.567310894Z [1773999098.567272] ERR: [core] FAILED TO CREATE KERNEL TABLE 0 (No such file or directory), KERNEL FORWARDING DISABLED
+2026-03-20T10:44:12.358530262Z [1774003452.358413] WARNING: [doe3TOf8QGOVG9XsFzU/KHkTRrvlYPAU8k/1 port 49639]: [core] No support for kernel packet forwarding available (interface to kernel module not open)
+2026-03-20T10:54:17.799783184Z [1774004057.799716] WARNING: [lW7hAY5rnFIlVLLMZfz/2045339907/1 port 49935]: [core] No support for kernel packet forwarding available (interface to kernel module not open)
+2026-03-20T10:54:17.849139668Z [1774004057.849051] WARNING: [lW7hAY5rnFIlVLLMZfz/ivoFeXqxrbPRSs/1 port 49747]: [core] No support for kernel packet forwarding available (interface to kernel module not open)
+2026-03-20T10:54:17.877972399Z [1774004057.877829] WARNING: [lW7hAY5rnFIlVLLMZfz/ivoFeXqxrbPRSs/1 port 49746]: [core] No support for kernel packet forwarding available (interface to kernel module not open)
+2026-03-20T10:54:18.177559077Z [1774004058.177374] WARNING: [lW7hAY5rnFIlVLLMZfz/2045339907/1 port 49934]: [core] No support for kernel packet forwarding available (interface to kernel module not open)
+2026-03-20T11:20:58.271188982Z [1774005658.271014] WARNING: [TX31qaumFyNxN3WehAw/2046942036/1 port 49313]: [core] No support for kernel packet forwarding available (interface to kernel module not open)
+2026-03-20T11:20:58.580924963Z [1774005658.580790] WARNING: [TX31qaumFyNxN3WehAw/2046942036/1 port 49312]: [core] No support for kernel packet forwarding available (interface to kernel module not open)
+2026-03-20T11:20:59.065794470Z [1774005659.065632] WARNING: [TX31qaumFyNxN3WehAw/5wPnMj2vAzs6tA/1 port 49899]: [core] No support for kernel packet forwarding available (interface to kernel module not open)
+2026-03-20T11:20:59.186068740Z [1774005659.185882] WARNING: [TX31qaumFyNxN3WehAw/5wPnMj2vAzs6tA/1 port 49898]: [core] No support for kernel packet forwarding available (interface to kernel module not open)
+2026-03-20T11:21:15.091245552Z [1774005675.091077] WARNING: [zmRdOYvWAUnBhmPkppR/2046959238/1 port 49609]: [core] No support for kernel packet forwarding available (interface to kernel module not open)
+2026-03-20T11:21:15.158316022Z [1774005675.158205] WARNING: [zmRdOYvWAUnBhmPkppR/9zlw28HeYjmGGF/1 port 49195]: [core] No support for kernel packet forwarding available (interface to kernel module not open)
+2026-03-20T11:21:15.285908468Z [1774005675.285701] WARNING: [zmRdOYvWAUnBhmPkppR/9zlw28HeYjmGGF/1 port 49194]: [core] No support for kernel packet forwarding available (interface to kernel module not open)
+2026-03-20T11:21:15.360685143Z [1774005675.360493] WARNING: [zmRdOYvWAUnBhmPkppR/2046959238/1 port 49608]: [core] No support for kernel packet forwarding available (interface to kernel module not open)
+2026-03-20T11:34:24.669744629Z [1774006464.669641] WARNING: [qSYvBR4ZJa5R2zL9InO/j71LpmDY6y7wUK/1 port 49135]: [core] No support for kernel packet forwarding available (interface to kernel module not open)
+2026-03-20T11:34:42.649570485Z [1774006482.649479] WARNING: [ZPEy75aJ7qvPzlfE5D6/2047764140/1 port 49789]: [core] No support for kernel packet forwarding available (interface to kernel module not open)
+2026-03-20T11:34:42.701919413Z [1774006482.701768] WARNING: [ZPEy75aJ7qvPzlfE5D6/thYLfSigTpmC8T/1 port 49279]: [core] No support for kernel packet forwarding available (interface to kernel module not open)
+2026-03-20T11:34:42.834433475Z [1774006482.834257] WARNING: [ZPEy75aJ7qvPzlfE5D6/thYLfSigTpmC8T/1 port 49278]: [core] No support for kernel packet forwarding available (interface to kernel module not open)
+2026-03-20T11:34:42.865280560Z [1774006482.865170] WARNING: [ZPEy75aJ7qvPzlfE5D6/2047764140/1 port 49788]: [core] No support for kernel packet forwarding available (interface to kernel module not open)
+2026-03-20T11:35:06.765387430Z [1774006506.765267] WARNING: [9giIKgYygG6LZ1Drd5J/mssl6YXhQHDJrJ/1 port 49285]: [core] No support for kernel packet forwarding available (interface to kernel module not open)
+2026-03-20T12:58:25.321734679Z [1774011505.321661] WARNING: [yUU8UtUoHj248Z73Dkz/2052786320/1 port 49581]: [core] No support for kernel packet forwarding available (interface to kernel module not open)
+2026-03-20T12:58:25.372411863Z [1774011505.372222] WARNING: [yUU8UtUoHj248Z73Dkz/3C8tR8HTyQTxkL/1 port 49203]: [core] No support for kernel packet forwarding available (interface to kernel module not open)
+2026-03-20T12:58:25.380336076Z [1774011505.380228] WARNING: [yUU8UtUoHj248Z73Dkz/3C8tR8HTyQTxkL/1 port 49202]: [core] No support for kernel packet forwarding available (interface to kernel module not open)
+2026-03-20T12:58:25.590361497Z [1774011505.590214] WARNING: [yUU8UtUoHj248Z73Dkz/2052786320/1 port 49580]: [core] No support for kernel packet forwarding available (interface to kernel module not open)
+2026-03-20T13:00:07.860415769Z [1774011607.860207] WARNING: [2052889092_1659399948@10.46.0.98/a2DoYgbGhCVIDT/1 port 49491]: [core] No support for kernel packet forwarding available (interface to kernel module not open)
+2026-03-20T13:00:33.230090109Z [1774011633.229916] WARNING: [feMPY2iDzmbBNSvWobB/lH8EOhdhaslXki/1 port 49967]: [core] No support for kernel packet forwarding available (interface to kernel module not open)
+2026-03-20T13:00:44.400801223Z [1774011644.400684] WARNING: [uDbDA6E1pSCRATL4vPl/2052927874/1 port 49829]: [core] No support for kernel packet forwarding available (interface to kernel module not open)
+2026-03-20T13:00:44.455198257Z [1774011644.455030] WARNING: [uDbDA6E1pSCRATL4vPl/uG7w9QCoQijsxa/1 port 49467]: [core] No support for kernel packet forwarding available (interface to kernel module not open)
+2026-03-20T13:00:44.595577190Z [1774011644.595462] WARNING: [uDbDA6E1pSCRATL4vPl/uG7w9QCoQijsxa/1 port 49466]: [core] No support for kernel packet forwarding available (interface to kernel module not open)
+2026-03-20T13:00:44.650221188Z [1774011644.650047] WARNING: [uDbDA6E1pSCRATL4vPl/2052927874/1 port 49828]: [core] No support for kernel packet forwarding available (interface to kernel module not open)
+2026-03-20T13:03:52.053113666Z [1774011832.052937] WARNING: [tdOiwrbi9MpPsyMx2t7/2053114791/1 port 49905]: [core] No support for kernel packet forwarding available (interface to kernel module not open)
+2026-03-20T13:03:52.100815439Z [1774011832.100615] WARNING: [tdOiwrbi9MpPsyMx2t7/9qwiRKmdXlEj8i/1 port 49949]: [core] No support for kernel packet forwarding available (interface to kernel module not open)
+2026-03-20T13:03:52.240861126Z [1774011832.240691] WARNING: [tdOiwrbi9MpPsyMx2t7/9qwiRKmdXlEj8i/1 port 49948]: [core] No support for kernel packet forwarding available (interface to kernel module not open)
+2026-03-20T13:03:52.280785551Z [1774011832.280612] WARNING: [tdOiwrbi9MpPsyMx2t7/2053114791/1 port 49904]: [core] No support for kernel packet forwarding available (interface to kernel module not open)
+2026-03-20T13:08:41.260223609Z [1774012121.260113] WARNING: [Ed5o4qcJYfauBemKPth/8u18AaR1QvjU7b/1 port 49929]: [core] No support for kernel packet forwarding available (interface to kernel module not open)
+2026-03-20T13:08:57.809969048Z [1774012137.809867] WARNING: [QRR5DnxstKV6RJTwAAu/2053421203/1 port 49043]: [core] No support for kernel packet forwarding available (interface to kernel module not open)
+2026-03-20T13:08:58.059419525Z [1774012138.059246] WARNING: [QRR5DnxstKV6RJTwAAu/2053421203/1 port 49042]: [core] No support for kernel packet forwarding available (interface to kernel module not open)
+2026-03-20T13:08:58.624186583Z [1774012138.624001] WARNING: [QRR5DnxstKV6RJTwAAu/S7EA8zShblBiZi/1 port 49141]: [core] No support for kernel packet forwarding available (interface to kernel module not open)
+2026-03-20T13:08:58.726630769Z [1774012138.726486] WARNING: [QRR5DnxstKV6RJTwAAu/S7EA8zShblBiZi/1 port 49140]: [core] No support for kernel packet forwarding available (interface to kernel module not open)
+2026-03-20T13:10:34.039860286Z [1774012234.039658] WARNING: [nOIBfES7FX7fegzBQpZ/2053516940/1 port 49825]: [core] No support for kernel packet forwarding available (interface to kernel module not open)
+2026-03-20T13:10:34.139793382Z [1774012234.139693] WARNING: [nOIBfES7FX7fegzBQpZ/kw7Wf2Ut8jRku4/1 port 49051]: [core] No support for kernel packet forwarding available (interface to kernel module not open)
+2026-03-20T13:10:34.180198086Z [1774012234.180022] WARNING: [nOIBfES7FX7fegzBQpZ/kw7Wf2Ut8jRku4/1 port 49050]: [core] No support for kernel packet forwarding available (interface to kernel module not open)
+2026-03-20T13:10:34.279426862Z [1774012234.279242] WARNING: [nOIBfES7FX7fegzBQpZ/2053516940/1 port 49824]: [core] No support for kernel packet forwarding available (interface to kernel module not open)
+2026-03-20T13:11:56.852226666Z [1774012316.852122] WARNING: [2h3FsTLZ9HkGNGnA8yb/2053600899/1 port 49563]: [core] No support for kernel packet forwarding available (interface to kernel module not open)
+2026-03-20T13:11:56.904802797Z [1774012316.904689] WARNING: [2h3FsTLZ9HkGNGnA8yb/W9HYewJbSWy3TR/1 port 49707]: [core] No support for kernel packet forwarding available (interface to kernel module not open)
+2026-03-20T13:11:56.934666668Z [1774012316.934530] WARNING: [2h3FsTLZ9HkGNGnA8yb/W9HYewJbSWy3TR/1 port 49706]: [core] No support for kernel packet forwarding available (interface to kernel module not open)
+2026-03-20T13:11:57.079566902Z [1774012317.079419] WARNING: [2h3FsTLZ9HkGNGnA8yb/2053600899/1 port 49562]: [core] No support for kernel packet forwarding available (interface to kernel module not open)
+2026-03-20T13:12:36.784372906Z [1774012356.784213] WARNING: [MUpCo1I6e0HBBdzW0Bx/efWvAeOcgiZq0O/1 port 49489]: [core] No support for kernel packet forwarding available (interface to kernel module not open)
+2026-03-20T13:12:46.671468711Z [1774012366.671378] WARNING: [hHCtxK6AvUvtOhdIBXR/2053650514/1 port 49673]: [core] No support for kernel packet forwarding available (interface to kernel module not open)
+2026-03-20T13:12:46.735928858Z [1774012366.735756] WARNING: [hHCtxK6AvUvtOhdIBXR/RTpBJozn9sOhYv/1 port 49139]: [core] No support for kernel packet forwarding available (interface to kernel module not open)
+2026-03-20T13:12:46.879276060Z [1774012366.879106] WARNING: [hHCtxK6AvUvtOhdIBXR/2053650514/1 port 49672]: [core] No support for kernel packet forwarding available (interface to kernel module not open)
+2026-03-20T13:12:46.884134745Z [1774012366.883984] WARNING: [hHCtxK6AvUvtOhdIBXR/RTpBJozn9sOhYv/1 port 49138]: [core] No support for kernel packet forwarding available (interface to kernel module not open)
+2026-03-20T13:13:18.750433726Z [1774012398.750242] WARNING: [dhrpIZOpMe5KafOHn9J/k336OmAngFjrOA/1 port 49213]: [core] No support for kernel packet forwarding available (interface to kernel module not open)
+2026-03-20T13:13:30.654219585Z [1774012410.654129] WARNING: [lCNI3RHvnIyEiM0ykM4/2053694859/1 port 49507]: [core] No support for kernel packet forwarding available (interface to kernel module not open)
+2026-03-20T13:13:30.704917518Z [1774012410.704750] WARNING: [lCNI3RHvnIyEiM0ykM4/KES4AOViy8olV0/1 port 49267]: [core] No support for kernel packet forwarding available (interface to kernel module not open)
+2026-03-20T13:13:30.734484932Z [1774012410.734357] WARNING: [lCNI3RHvnIyEiM0ykM4/KES4AOViy8olV0/1 port 49266]: [core] No support for kernel packet forwarding available (interface to kernel module not open)
+2026-03-20T13:13:30.859110620Z [1774012410.858922] WARNING: [lCNI3RHvnIyEiM0ykM4/2053694859/1 port 49506]: [core] No support for kernel packet forwarding available (interface to kernel module not open)
